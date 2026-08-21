@@ -38,7 +38,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="relative w-full h-[62vh] sm:h-[72vh] lg:h-[80vh] rounded-[28px] sm:rounded-[36px] overflow-hidden bg-dark-900 border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)]"
           >
-            {/* Seamless Stacked Slide Images (Zero Black Gap, 100% Preloaded Crossfade) */}
+            {/* Seamless Stacked Slide Images */}
             {beforeAfterSlides.map((imgUrl, idx) => (
               <img
                 key={idx}
@@ -58,7 +58,7 @@ export default function Hero() {
         </div>
 
         {/* RIGHT: Structured 3-Line Sales Message & Actions */}
-        <div className="lg:col-span-6 flex flex-col justify-center space-y-5 sm:space-y-6 text-left lg:pl-6 py-2 lg:py-6">
+        <div className="lg:col-span-6 flex flex-col justify-center space-y-6 text-left lg:pl-6 py-2 lg:py-6">
           
           {/* 3-Line Structured Headline */}
           <motion.div
@@ -67,10 +67,10 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="space-y-1"
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white tracking-tight leading-[1.12]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight leading-[1.1]">
               Kratzer, Dellen & <br />
               Lackschäden <br />
-              <span className="text-gradient-orange underline decoration-brand-orange decoration-3 underline-offset-6">
+              <span className="text-gradient-orange underline decoration-brand-orange decoration-3 underline-offset-8">
                 spurlos beseitigt.
               </span>
             </h1>
@@ -81,9 +81,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-sm sm:text-base lg:text-lg text-slate-200 font-normal leading-relaxed max-w-lg"
+            className="text-base sm:text-lg lg:text-xl text-slate-100 font-normal leading-relaxed max-w-xl"
           >
-            Bis zu <strong className="text-white font-extrabold text-amber-400 underline decoration-amber-400 decoration-2 underline-offset-4">70% günstiger</strong> als ein teurer Neuteile-Austausch. Wir erhalten den vollen Fahrzeugwert mit dem <span className="text-amber-300 font-semibold">TÜV-geprüften WheelDoctor System</span> und 100% Originallack-Erhalt.
+            Bis zu <strong className="text-amber-400 font-black underline decoration-amber-400 decoration-2 underline-offset-4">70% günstiger</strong> als ein Neuteile-Austausch. Mit dem <span className="text-amber-300 font-bold">TÜV WheelDoctor System</span> und 100% Werkslack-Erhalt.
           </motion.p>
 
           {/* CTA Group */}
@@ -91,26 +91,26 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="pt-1 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5"
+            className="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-5"
           >
             <a
               href="https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20ein%20Schadensfoto%20f%C3%BCr%20eine%20Preiseinsch%C3%A4tzung%20senden."
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-3d-luxury inline-flex items-center gap-3 px-7 sm:px-8 py-3.5 sm:py-4 text-white text-sm sm:text-base font-extrabold tracking-wide rounded-xl group cursor-pointer"
+              className="btn-3d-luxury inline-flex items-center gap-3 px-8 py-4 text-white text-base sm:text-lg font-black tracking-wide rounded-2xl group cursor-pointer shadow-xl"
             >
-              <MessageSquare className="w-4 h-4 fill-current" />
+              <MessageSquare className="w-5 h-5 fill-current" />
               <span>Foto per WhatsApp senden</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
 
             <div className="flex flex-col text-left">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Direkter Draht</span>
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Direkter Meisterkontakt</span>
               <a
                 href="tel:01702025130"
-                className="text-base sm:text-lg font-extrabold text-amber-400 hover:text-white flex items-center gap-1.5 transition-colors"
+                className="text-lg sm:text-xl font-black text-amber-400 hover:text-white flex items-center gap-2 transition-colors"
               >
-                <Phone className="w-3.5 h-3.5 text-brand-orange" />
+                <Phone className="w-4 h-4 text-brand-orange" />
                 0170 2025130
               </a>
             </div>
