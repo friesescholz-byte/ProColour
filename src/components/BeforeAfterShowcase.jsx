@@ -59,39 +59,39 @@ export default function BeforeAfterShowcase() {
   });
 
   return (
-    <section id="results" className="py-24 md:py-32 bg-paint-nardo border-b border-white/10 relative overflow-hidden">
+    <section id="results" className="py-18 md:py-24 bg-paint-nardo border-b border-white/10 relative overflow-hidden">
       
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-brand-orange/6 rounded-full blur-[180px] pointer-events-none"></div>
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-orange/6 rounded-full blur-[180px] pointer-events-none"></div>
 
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-amber-400 text-xs font-black uppercase tracking-wider">
+        <div className="text-center max-w-2xl mx-auto space-y-3 mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5 text-brand-orange" />
             <span>Vorher & Nachher Beweis</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Echte Ergebnisse <br />
             <span className="text-gradient-orange">aus unserer Meisterwerkstatt.</span>
           </h2>
 
-          <p className="text-slate-200 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
             Klicken Sie auf den Umschalter, um den direkten Vorher- und Nachher-Vergleich zu sehen:
           </p>
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-14">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-10 sm:mb-12">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveFilter(cat.id)}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                 activeFilter === cat.id
-                  ? 'bg-gradient-to-r from-brand-orange to-amber-500 text-white shadow-lg shadow-brand-orange/25 scale-105'
+                  ? 'bg-gradient-to-r from-brand-orange to-amber-500 text-white shadow-md shadow-brand-orange/20 scale-105'
                   : 'bg-black/40 hover:bg-black/60 text-slate-300 hover:text-white border border-white/10'
               }`}
             >
@@ -100,8 +100,8 @@ export default function BeforeAfterShowcase() {
           ))}
         </div>
 
-        {/* 3 Main Before/After Pairs Grid (Clean Images - No distracting badge stickers) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        {/* 3 Main Before/After Pairs Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
           {filteredPairs.map((item, idx) => {
             const currentMode = toggleState[idx] || 'after';
             const displayImage = currentMode === 'before' ? item.before : item.after;
@@ -109,11 +109,11 @@ export default function BeforeAfterShowcase() {
             return (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="glass-card-pro rounded-3xl overflow-hidden border border-white/15 hover:border-brand-orange/40 transition-all duration-300 flex flex-col justify-between group shadow-xl hover:shadow-2xl"
+                transition={{ duration: 0.4, delay: idx * 0.08 }}
+                className="glass-card-pro rounded-2xl overflow-hidden border border-white/15 hover:border-brand-orange/40 transition-all duration-300 flex flex-col justify-between group shadow-lg"
               >
                 {/* Image Canvas with Interactive Toggle */}
                 <div className="relative aspect-[4/3] bg-dark-950 overflow-hidden">
@@ -126,64 +126,64 @@ export default function BeforeAfterShowcase() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none"></div>
 
                   {/* Zoom Button */}
-                  <div className="absolute top-4 right-4 z-20">
+                  <div className="absolute top-3 right-3 z-20">
                     <button
                       onClick={() => setModalItem({ ...item, currentMode })}
-                      className="p-2.5 rounded-xl bg-black/75 hover:bg-brand-orange text-white backdrop-blur-md border border-white/15 transition-colors cursor-pointer"
+                      className="p-2 rounded-lg bg-black/75 hover:bg-brand-orange text-white backdrop-blur-md border border-white/15 transition-colors cursor-pointer"
                       aria-label="Großansicht öffnen"
                     >
-                      <Eye className="w-4 h-4" />
+                      <Eye className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
                   {/* Bottom Interactive Vorher/Nachher Pill Switch */}
-                  <div className="absolute bottom-4 left-4 z-20">
-                    <div className="flex bg-black/85 backdrop-blur-xl p-1.5 rounded-xl border border-white/15 shadow-xl">
+                  <div className="absolute bottom-3 left-3 z-20">
+                    <div className="flex bg-black/85 backdrop-blur-xl p-1 rounded-lg border border-white/15 shadow-lg">
                       <button
                         onClick={() => handleToggle(idx, 'before')}
-                        className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
+                        className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
                           currentMode === 'before'
-                            ? 'bg-red-600 text-white shadow-md'
+                            ? 'bg-red-600 text-white shadow-sm'
                             : 'text-slate-400 hover:text-white'
                         }`}
                       >
-                        Vorher (Schaden)
+                        Vorher
                       </button>
                       <button
                         onClick={() => handleToggle(idx, 'after')}
-                        className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
+                        className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
                           currentMode === 'after'
-                            ? 'bg-emerald-600 text-white shadow-md'
+                            ? 'bg-emerald-600 text-white shadow-sm'
                             : 'text-slate-400 hover:text-white'
                         }`}
                       >
-                        Nachher (Repariert)
+                        Nachher
                       </button>
                     </div>
                   </div>
                 </div>
 
                 {/* Card Content */}
-                <div className="p-7 sm:p-8 space-y-3 flex-grow">
-                  <h3 className="text-2xl sm:text-3xl font-black text-white group-hover:text-amber-400 transition-colors leading-snug">
+                <div className="p-5 sm:p-6 space-y-2 flex-grow">
+                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-amber-400 transition-colors leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-slate-200 text-base sm:text-lg leading-relaxed font-normal">
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
 
                 {/* Card Footer Link */}
-                <div className="px-7 sm:px-8 pb-7 pt-3 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-xs sm:text-sm text-slate-400 font-semibold">Direkte Einschätzung</span>
+                <div className="px-5 sm:px-6 pb-5 pt-2 border-t border-white/10 flex items-center justify-between">
+                  <span className="text-xs text-slate-400">Direkte Einschätzung</span>
                   <a
                     href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20habe%20eine%20Frage%20zu%20einer%20Reparatur%20wie%20hier:%20${encodeURIComponent(item.title)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm sm:text-base font-extrabold text-amber-400 hover:text-white transition-colors group/link"
+                    className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-amber-400 hover:text-white transition-colors group/link"
                   >
                     <span>Preis anfragen</span>
-                    <ArrowRight className="w-4 h-4 text-brand-orange group-hover/link:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 text-brand-orange group-hover/link:translate-x-1 transition-transform" />
                   </a>
                 </div>
 
@@ -205,38 +205,38 @@ export default function BeforeAfterShowcase() {
             onClick={() => setModalItem(null)}
           >
             <motion.div
-              initial={{ scale: 0.95, y: 20 }}
+              initial={{ scale: 0.95, y: 16 }}
               animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
+              exit={{ scale: 0.95, y: 16 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl w-full bg-[#161922] border border-white/20 rounded-3xl overflow-hidden shadow-2xl space-y-4 p-6 sm:p-8"
+              className="relative max-w-3xl w-full bg-[#161922] border border-white/20 rounded-2xl overflow-hidden shadow-2xl space-y-3.5 p-5 sm:p-6"
             >
               <button
                 onClick={() => setModalItem(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-brand-orange text-white transition-colors cursor-pointer z-30"
+                className="absolute top-3.5 right-3.5 p-1.5 rounded-full bg-white/10 hover:bg-brand-orange text-white transition-colors cursor-pointer z-30"
                 aria-label="Schließen"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
 
               <div>
-                <h3 className="text-2xl sm:text-3xl font-black text-white">{modalItem.title}</h3>
-                <p className="text-slate-300 text-sm sm:text-base mt-1 leading-relaxed">{modalItem.desc}</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-white">{modalItem.title}</h3>
+                <p className="text-slate-300 text-xs sm:text-sm mt-0.5 leading-relaxed">{modalItem.desc}</p>
               </div>
 
-              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-black border border-white/10">
+              <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-black border border-white/10">
                 <img
                   src={modalItem.currentMode === 'before' ? modalItem.before : modalItem.after}
                   alt={modalItem.title}
                   className="w-full h-full object-cover object-center"
                 />
 
-                <div className="absolute bottom-4 left-4 flex bg-black/85 backdrop-blur-xl p-1.5 rounded-xl border border-white/20 shadow-2xl">
+                <div className="absolute bottom-3 left-3 flex bg-black/85 backdrop-blur-xl p-1 rounded-lg border border-white/20 shadow-xl">
                   <button
                     onClick={() => setModalItem((prev) => ({ ...prev, currentMode: 'before' }))}
-                    className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
+                    className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
                       modalItem.currentMode === 'before'
-                        ? 'bg-red-600 text-white shadow-md'
+                        ? 'bg-red-600 text-white shadow-sm'
                         : 'text-slate-400 hover:text-white'
                     }`}
                   >
@@ -244,9 +244,9 @@ export default function BeforeAfterShowcase() {
                   </button>
                   <button
                     onClick={() => setModalItem((prev) => ({ ...prev, currentMode: 'after' }))}
-                    className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
+                    className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
                       modalItem.currentMode === 'after'
-                        ? 'bg-emerald-600 text-white shadow-md'
+                        ? 'bg-emerald-600 text-white shadow-sm'
                         : 'text-slate-400 hover:text-white'
                     }`}
                   >
@@ -255,16 +255,16 @@ export default function BeforeAfterShowcase() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-2">
-                <span className="text-xs sm:text-sm text-slate-400 font-semibold">100% zertifizierte Meisterqualität</span>
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-xs text-slate-400">100% zertifizierte Meisterqualität</span>
                 <a
                   href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20habe%20eine%20Preisanfrage%20zu:%20${encodeURIComponent(modalItem.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-3d-luxury inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white text-xs sm:text-sm font-black cursor-pointer"
+                  className="btn-3d-luxury inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white text-xs font-bold cursor-pointer"
                 >
                   <span>Gleichen Schaden per WhatsApp anfragen</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>
 
