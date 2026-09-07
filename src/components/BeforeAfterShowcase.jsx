@@ -75,7 +75,7 @@ export default function BeforeAfterShowcase() {
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Echte Ergebnisse <br />
-            <span className="text-gradient-orange">aus unserer Meisterwerkstatt.</span>
+            <span className="text-gradient-orange">aus unserer Fachwerkstatt.</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
@@ -256,7 +256,7 @@ export default function BeforeAfterShowcase() {
               </div>
 
               <div className="flex items-center justify-between pt-1">
-                <span className="text-xs text-slate-400">100% zertifizierte Meisterqualität</span>
+                <span className="text-xs text-slate-400">100% zertifizierte Fachqualität</span>
                 <a
                   href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20habe%20eine%20Preisanfrage%20zu:%20${encodeURIComponent(modalItem.title)}`}
                   target="_blank"

@@ -12,7 +12,7 @@ export default function BeforeAfterSlider() {
     {
       id: 'spot-repair',
       title: 'Lackkratzer & Schrammenbeseitigung',
-      category: 'Spot-Repair Meistertechnik',
+      category: 'Spot-Repair Fachkompetenz',
       description: 'Tiefer Lackkratzer und Abschürfung punktgenau beilackiert – Farbton zu 100% werksgetreu gemischt.',
       before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(25)_ergebnis.webp',
       after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(24)_ergebnis.webp',

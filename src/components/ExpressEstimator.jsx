@@ -39,7 +39,7 @@ export default function ExpressEstimator() {
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
             Schaden konfigurieren & <br />
-            <span className="text-gradient-orange font-serif italic font-normal">Foto per WhatsApp senden.</span>
+            <span className="text-gradient-orange font-bold">Foto per WhatsApp senden.</span>
           </h2>
           <p className="text-slate-300 text-base sm:text-lg">
             Wählen Sie kurz Ihren Schaden aus und erhalten Sie direkt vom Inhaber Jens Rüsch eine realistische, unverbindliche Ersteinschätzung.

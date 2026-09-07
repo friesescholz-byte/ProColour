@@ -89,32 +89,35 @@ export default function Hero() {
               Bis zu <strong className="text-amber-400 font-black underline decoration-amber-400 decoration-2 underline-offset-4">70% günstiger</strong> als ein Neuteile-Austausch. Mit dem <span className="text-amber-300 font-bold">TÜV WheelDoctor System</span> und 100% Werkslack-Erhalt.
             </motion.p>
 
-            {/* CTA Group */}
+            {/* CTA Group with Clean Visual Separation */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="pt-1 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5"
+              className="pt-2 space-y-3"
             >
-              <a
-                href="https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20ein%20Schadensfoto%20f%C3%BCr%20eine%20Preiseinsch%C3%A4tzung%20senden."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-3d-luxury inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 text-white text-sm sm:text-base font-black tracking-wide rounded-xl group cursor-pointer shadow-lg"
-              >
-                <MessageSquare className="w-4 h-4 fill-current" />
-                <span>Foto per WhatsApp senden</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              <div>
+                <a
+                  href="https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20ein%20Schadensfoto%20f%C3%BCr%20eine%20Preiseinsch%C3%A4tzung%20senden."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-3d-luxury inline-flex items-center gap-2.5 px-7 py-3.5 sm:py-4 text-white text-sm sm:text-base font-black tracking-wide rounded-xl group cursor-pointer shadow-lg"
+                >
+                  <MessageSquare className="w-4 h-4 fill-current" />
+                  <span>Foto per WhatsApp senden</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
 
-              <div className="flex flex-col text-left">
-                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Direkter Meisterkontakt</span>
+              {/* Visually separated, elegant telephone contact info */}
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-300">
+                <span className="text-slate-400">Oder direkt telefonisch anfragen:</span>
                 <a
                   href="tel:01702025130"
-                  className="text-base sm:text-lg font-black text-amber-400 hover:text-white flex items-center gap-1.5 transition-colors"
+                  className="font-extrabold text-amber-400 hover:text-white inline-flex items-center gap-1.5 transition-colors"
                 >
-                  <Phone className="w-3.5 h-3.5 text-brand-orange" />
-                  0170 2025130
+                  <Phone className="w-3.5 h-3.5 text-brand-orange shrink-0" />
+                  <span>0170 2025130</span>
                 </a>
               </div>
             </motion.div>
@@ -123,17 +126,17 @@ export default function Hero() {
 
         </div>
 
-        {/* OVERLAPPING BOTTOM TITLE (Directly bound to the Grid, cannot detach when zoomed out) */}
+        {/* OVERLAPPING BOTTOM TITLE (Unified font-sans typography matching header & site) */}
         <div className="w-full relative z-30 pointer-events-none select-none -mt-8 sm:-mt-12 lg:-mt-16 overflow-visible">
           <div className="flex items-baseline gap-x-3 sm:gap-x-5 whitespace-nowrap pl-2 sm:pl-4 pr-4 sm:pr-8">
             {/* 1. Pro Colour */}
-            <span className="font-serif italic font-normal text-gradient-orange text-[clamp(2rem,4.8vw,5.8rem)] tracking-tight leading-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.98)] shrink-0">
+            <span className="font-sans font-black tracking-tight text-gradient-orange text-[clamp(2rem,4.8vw,5.8rem)] leading-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.98)] shrink-0">
               Pro Colour
             </span>
 
-            {/* 2. smart repair */}
+            {/* 2. Smart Repair */}
             <span className="font-sans font-black tracking-tight uppercase text-[#F4E8D2] text-[clamp(2rem,4.8vw,5.8rem)] leading-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.98)] shrink-0">
-              smart repair
+              Smart Repair
             </span>
           </div>
         </div>

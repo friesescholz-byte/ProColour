@@ -17,6 +17,7 @@ export default function Navbar() {
     { name: 'Warum wir?', href: '#pas-problems' },
     { name: 'Leistungen', href: '#services' },
     { name: 'Handwerk & Team', href: '#craftsmanship' },
+    { name: 'Partner', href: '#partners' },
     { name: 'Kontakt', href: '#contact' },
   ];
 

@@ -14,7 +14,7 @@ export default function Craftsmanship() {
     {
       name: 'Witali Gerz',
       role: 'Smart-Repair Experte',
-      since: 'Meisterhandwerk'
+      since: 'Qualitätshandwerk'
     },
     {
       name: 'Karin Kirchhoff',

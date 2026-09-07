@@ -80,7 +80,7 @@ export default function Services() {
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Maßgeschneiderte Instandsetzung <br />
-            <span className="text-gradient-orange">mit meisterhafter Präzision.</span>
+            <span className="text-gradient-orange">mit höchster Präzision.</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">

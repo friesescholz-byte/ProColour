@@ -29,7 +29,7 @@ export default function Footer() {
                 Zertifizierter Smart Repair Fachbetrieb in Bruchhausen-Vilsen. Spezialisiert auf Spot-Repair, TÜV-geprüfte Alufelgenaufbereitung (WheelDoctor), schonende Dellenentfernung und Colourlock® Lederpflege.
               </p>
               <div className="text-[11px] text-amber-400 font-bold">
-                Meisterbetrieb • Seit 2014 für Sie im Einsatz
+                Zertifizierter Fachbetrieb • Seit 2014 für Sie im Einsatz
               </div>
             </div>
 
@@ -41,6 +41,7 @@ export default function Footer() {
                 <li><a href="#services" className="hover:text-amber-400 transition-colors">Alufelgenaufbereitung (TÜV WheelDoctor)</a></li>
                 <li><a href="#services" className="hover:text-amber-400 transition-colors">Dellenentfernung ohne Lackieren (DoL)</a></li>
                 <li><a href="#services" className="hover:text-amber-400 transition-colors">Lederinstandsetzung & Colourlock®</a></li>
+                <li><a href="#partners" className="hover:text-amber-400 transition-colors">Autohäuser & Partner</a></li>
                 <li>
                   <a href="#results" className="text-amber-400 hover:text-white font-bold flex items-center gap-1 transition-colors">
                     <span>Echte Vorher- & Nachher-Galerie</span>
