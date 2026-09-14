@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Disc, Hammer, Armchair, CheckCircle2, ArrowRight, Zap } from 'lucide-react';
+import { Sparkles, Disc, Hammer, Armchair, CheckCircle2, ArrowRight, FileCheck2 } from 'lucide-react';
 
 export default function Services() {
   const services = [
@@ -11,7 +11,7 @@ export default function Services() {
       points: [
         'Bis zu 70% günstiger als Komplettlackierung',
         'Exakter Werksfarbton durch Farbmischsystem',
-        'Meist innerhalb von 24h fertiggestellt'
+        'Ideal für Leasing-Rückläufer: Schützt vor teuren Abzügen'
       ]
     },
     {
@@ -21,7 +21,7 @@ export default function Services() {
       points: [
         'Zertifizierte TÜV-Sicherheit & Werterhalt',
         'Glanzdrehen, Lackieren & Veredeln aus einer Hand',
-        'Passender Original-Farbton für jede Automarke'
+        'Beseitigt leasingrelevante Felgenschäden'
       ]
     },
     {
@@ -31,7 +31,7 @@ export default function Services() {
       points: [
         '100% Erhalt des unberührten Werkslacks',
         'Keine Spachtelarbeiten, keine Farbunterschiede',
-        'Von Kfz-Gutachtern & Versicherungen empfohlen'
+        'Von Kfz-Gutachtern & Leasinggebern voll anerkannt'
       ]
     },
     {
@@ -72,19 +72,18 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto space-y-3 mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-brand-orange/15 border border-brand-orange/40 text-amber-300 text-xs font-bold uppercase tracking-wider backdrop-blur-md shadow-lg">
-            <Zap className="w-3.5 h-3.5 text-brand-orange" />
-            <span>Unsere Fachgebiete</span>
-          </div>
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-orange block mb-2">
+            Unsere Fachbereiche & Gutachten
+          </span>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Maßgeschneiderte Instandsetzung <br />
-            <span className="text-gradient-orange">mit höchster Präzision.</span>
+            <span className="text-gradient-orange">& Leasing-Rückläufer Gutachten.</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-            Wir reparieren punktgenau dort, wo der Schaden entstanden ist. Wirtschaftlich, schnell und werterhaltend.
+            Wir reparieren punktgenau dort, wo der Schaden entstanden ist – und sichern Sie mit verlässlichen Vorab-Gutachten vor überzogenen Leasing-Nachzahlungen ab.
           </p>
         </div>
 
@@ -148,6 +147,64 @@ export default function Services() {
             );
           })}
         </div>
+
+        {/* Featured Highlight Banner: Leasing-Rückläufer Gutachten & Vorab-Check */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mt-8 lg:mt-10 bg-gradient-to-r from-brand-orange/15 via-black/80 to-amber-500/10 border border-brand-orange/40 hover:border-brand-orange/70 rounded-2xl p-6 sm:p-8 backdrop-blur-2xl shadow-xl transition-all duration-300"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            
+            {/* Left Col: Short Headline & Concise Message */}
+            <div className="lg:col-span-7 space-y-3.5">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight leading-tight">
+                Leasing-Vorab-Check: <br />
+                <span className="text-gradient-orange">Teure Nachzahlungen sicher vermeiden.</span>
+              </h3>
+
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Wir erfassen beanstandbare Lack-, Felgen- und Karosserieschäden vor dem offiziellen Gutachtertermin und beseitigen diese nach Herstellervorgaben – bis zu 75% günstiger als die Nachbelastung durch das Autohaus.
+              </p>
+
+              <div className="pt-1">
+                <a
+                  href="https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20ein%20Vorab-Gutachten%20f%C3%BCr%20meine%20Leasing-R%C3%BCckgabe%20anfragen."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-brand-orange to-amber-500 hover:from-amber-500 hover:to-brand-orange text-white font-bold text-xs sm:text-sm shadow-lg hover:shadow-brand-orange/25 transition-all duration-300 active:scale-95"
+                >
+                  <FileCheck2 className="w-4 h-4" />
+                  <span>Leasing-Gutachten anfragen</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Right Col: 4 Crisp Single-Line Checkmarks */}
+            <div className="lg:col-span-5 flex flex-col justify-center space-y-2.5 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-white/10 lg:pl-8">
+              <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-200">
+                <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>Prüfung nach offiziellen Hersteller-Katalogen</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-200">
+                <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>Schadensanalyse vor dem DEKRA/TÜV-Termin</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-200">
+                <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>Bis zu 75% Ersparnis gegenüber Abzügen</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-200">
+                <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>100% stressfreie Fahrzeugrückgabe</span>
+              </div>
+            </div>
+
+          </div>
+        </motion.div>
 
       </div>
     </section>

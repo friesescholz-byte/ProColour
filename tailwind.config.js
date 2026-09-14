@@ -25,7 +25,7 @@ export default {
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        lobster: ['"Lobster"', 'cursive'],
       },
       boxShadow: {
         'luxury': '0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 35px -10px rgba(255, 94, 30, 0.2)',

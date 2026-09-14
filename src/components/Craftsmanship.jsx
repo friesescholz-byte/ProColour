@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Truck, ShieldCheck, Wrench } from 'lucide-react';
+import { Truck, ShieldCheck } from 'lucide-react';
 
 export default function Craftsmanship() {
   const teamImage = "https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/19visu0731d01037b3c4400463e0ee0fb8f0ef.webflow1_d9be8d926023669c171fa4e2d65482ae_ergebnis.webp";
@@ -59,15 +59,15 @@ export default function Craftsmanship() {
             transition={{ duration: 0.7 }}
             className="lg:col-span-6 space-y-6 text-left"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
-              <Wrench className="w-3.5 h-3.5 text-brand-orange" />
-              <span>Über Pro Colour Smart Repair</span>
+            <div>
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-orange block mb-2">
+                Handwerk & Historie
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                Leidenschaft für Perfektion <br />
+                <span className="text-gradient-orange">seit über 10 Jahren.</span>
+              </h2>
             </div>
-
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              Leidenschaft für Perfektion <br />
-              <span className="text-gradient-orange">seit über 10 Jahren.</span>
-            </h2>
 
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               Gegründet wurde Pro Colour im Jahr <strong className="text-white font-bold">2014 von Jens Rüsch</strong> – ursprünglich als mobiler Spezialservice für renommierte Autohäuser und Werkstätten.

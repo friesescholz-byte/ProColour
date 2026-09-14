@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export default function PainPointsPAS() {
   const cards = [
@@ -8,7 +8,7 @@ export default function PainPointsPAS() {
       id: 'leasing',
       problemHeadline: 'Teure Nachzahlungen bei der Leasing-Rückgabe?',
       solutionText: 'Bis zu 75% sparen: Wir beseitigen Felgen- und Lackschäden vor dem Gutachtertermin – 100% beanstandungsfrei.',
-      image: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(23)_ergebnis.webp',
+      image: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(12)_ergebnis.webp',
       linkText: 'Leasing-Schaden prüfen'
     },
     {
@@ -22,7 +22,7 @@ export default function PainPointsPAS() {
       id: 'wertverlust',
       problemHeadline: 'Dellen & Parkrempler drücken den Fahrzeugwert?',
       solutionText: 'Sanfte Ausbeultechnik (DoL): Dellen rückstandsfrei herausmassieren – ohne Spachteln und bei 100% Werkslack-Erhalt.',
-      image: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(26)_ergebnis.webp',
+      image: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_02.webp',
       linkText: 'Delle einschätzen lassen'
     },
     {
@@ -40,14 +40,13 @@ export default function PainPointsPAS() {
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-orange/5 rounded-full blur-[180px] pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto space-y-3 mb-12 sm:mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-brand-orange" />
-            <span>Klartext & Wirtschaftlichkeit</span>
-          </div>
+        {/* Section Header with Clean Icon-Free Eyebrow */}
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-orange block mb-2">
+            Wirtschaftlichkeit & Werterhalt
+          </span>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Warum traditionelle Reparaturen <br />
@@ -59,8 +58,8 @@ export default function PainPointsPAS() {
           </p>
         </div>
 
-        {/* 4 Clean Visual Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-7">
+        {/* 4 Clean Visual Cards with Generous Horizontal Image Aspect */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {cards.map((card, idx) => (
             <motion.div
               key={card.id}
@@ -70,18 +69,18 @@ export default function PainPointsPAS() {
               transition={{ duration: 0.4, delay: idx * 0.08 }}
               className="glass-card-pro rounded-2xl overflow-hidden border border-white/12 hover:border-brand-orange/50 transition-all duration-300 flex flex-col justify-between group shadow-lg hover:shadow-xl"
             >
-              {/* Clean Image Canvas */}
-              <div className="relative h-48 sm:h-56 overflow-hidden bg-dark-950">
+              {/* Clean Image Canvas: Generous Horizontal Proportions */}
+              <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-dark-950">
                 <img
                   src={card.image}
                   alt={card.problemHeadline}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#161922] via-[#161922]/30 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#161922] via-[#161922]/20 to-transparent"></div>
               </div>
 
               {/* Card Body */}
-              <div className="p-6 sm:p-7 space-y-3 flex-grow -mt-4 relative z-10">
+              <div className="p-6 sm:p-7 space-y-3 flex-grow relative z-10">
                 <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-amber-400 transition-colors leading-snug">
                   {card.problemHeadline}
                 </h3>

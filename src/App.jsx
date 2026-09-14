@@ -26,18 +26,20 @@ export default function App() {
         <Craftsmanship />
         <GoogleReviews />
 
-        {/* Unified Brand Typography Signature Strip (Consistent Plus Jakarta Sans) */}
-        <div className="w-full max-w-[1600px] mx-auto py-8 sm:py-12 px-4 sm:px-6 lg:px-10 overflow-hidden select-none pointer-events-none">
-          <div className="flex items-baseline justify-center gap-x-3 sm:gap-x-6 whitespace-nowrap opacity-80">
-            <span className="font-sans font-black tracking-tight text-gradient-orange text-[clamp(2.2rem,5vw,5.5rem)] leading-none shrink-0">
-              Pro Colour
-            </span>
-            <span className="font-sans font-black tracking-tight uppercase text-[#F4E8D2] text-[clamp(2.2rem,5vw,5.5rem)] leading-none shrink-0">
-              Smart Repair
-            </span>
+        {/* Brand Typography Signature Strip with identical bg-dark-950 background */}
+        <section className="bg-dark-950 border-b border-white/10 relative overflow-hidden py-8 sm:py-12 px-4 sm:px-6 lg:px-10 select-none pointer-events-none">
+          <div className="w-full max-w-[1600px] mx-auto">
+            <div className="flex items-center justify-center opacity-85">
+              <img
+                src="https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Colour_Schriftzug_01.webp"
+                alt="Pro Colour Smart Repair"
+                className="h-[clamp(2.5rem,5.5vw,5.5rem)] w-auto max-w-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]"
+                loading="lazy"
+              />
+            </div>
+            <div className="paint-pinstripe w-full mt-6 sm:mt-8"></div>
           </div>
-          <div className="paint-pinstripe w-full mt-6"></div>
-        </div>
+        </section>
 
         <ContactSection />
       </main>

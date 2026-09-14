@@ -4,10 +4,13 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   const beforeAfterSlides = [
-    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(17)_ergebnis.webp',
-    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(26)_ergebnis.webp',
-    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(14)_ergebnis.webp',
-    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(18)_ergebnis.webp'
+    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_01.webp',
+    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_02.webp',
+    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_03.webp',
+    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_04.webp',
+    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_05.webp',
+    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_06.webp',
+    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_07.webp'
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -126,19 +129,14 @@ export default function Hero() {
 
         </div>
 
-        {/* OVERLAPPING BOTTOM TITLE (Unified font-sans typography matching header & site) */}
-        <div className="w-full relative z-30 pointer-events-none select-none -mt-8 sm:-mt-12 lg:-mt-16 overflow-visible">
-          <div className="flex items-baseline gap-x-3 sm:gap-x-5 whitespace-nowrap pl-2 sm:pl-4 pr-4 sm:pr-8">
-            {/* 1. Pro Colour */}
-            <span className="font-sans font-black tracking-tight text-gradient-orange text-[clamp(2rem,4.8vw,5.8rem)] leading-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.98)] shrink-0">
-              Pro Colour
-            </span>
-
-            {/* 2. Smart Repair */}
-            <span className="font-sans font-black tracking-tight uppercase text-[#F4E8D2] text-[clamp(2rem,4.8vw,5.8rem)] leading-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.98)] shrink-0">
-              Smart Repair
-            </span>
-          </div>
+        {/* OVERLAPPING BOTTOM TITLE (Original Brand Schriftzug) */}
+        <div className="w-full relative z-30 pointer-events-none select-none -mt-8 sm:-mt-12 lg:-mt-16 overflow-visible pl-2 sm:pl-4">
+          <img
+            src="https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Colour_Schriftzug_01.webp"
+            alt="Pro Colour Smart Repair"
+            className="h-[clamp(2.8rem,6.8vw,6.8rem)] w-auto max-w-full object-contain object-left drop-shadow-[0_15px_35px_rgba(0,0,0,0.95)]"
+            loading="eager"
+          />
         </div>
 
       </div>

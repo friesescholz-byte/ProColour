@@ -68,10 +68,9 @@ export default function BeforeAfterShowcase() {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-brand-orange" />
-            <span>Vorher & Nachher Beweis</span>
-          </div>
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-orange block mb-2">
+            Vorher & Nachher Vergleich
+          </span>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             Echte Ergebnisse <br />
