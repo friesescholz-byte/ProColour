@@ -8,7 +8,7 @@ export default function PainPointsPAS() {
       id: 'leasing',
       problemHeadline: 'Teure Nachzahlungen bei der Leasing-Rückgabe?',
       solutionText: 'Bis zu 75% sparen: Wir beseitigen Felgen- und Lackschäden vor dem Gutachtertermin – 100% beanstandungsfrei.',
-      image: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(12)_ergebnis.webp',
+      image: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(23)_ergebnis.webp',
       linkText: 'Leasing-Schaden prüfen'
     },
     {
@@ -22,7 +22,7 @@ export default function PainPointsPAS() {
       id: 'wertverlust',
       problemHeadline: 'Dellen & Parkrempler drücken den Fahrzeugwert?',
       solutionText: 'Sanfte Ausbeultechnik (DoL): Dellen rückstandsfrei herausmassieren – ohne Spachteln und bei 100% Werkslack-Erhalt.',
-      image: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_02.webp',
+      image: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(26)_ergebnis.webp',
       linkText: 'Delle einschätzen lassen'
     },
     {
@@ -58,7 +58,7 @@ export default function PainPointsPAS() {
           </p>
         </div>
 
-        {/* 4 Clean Visual Cards with Generous Horizontal Image Aspect */}
+        {/* 4 Clean Visual Cards: Compact 1:1 Images with Large Prominent Typography */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {cards.map((card, idx) => (
             <motion.div
@@ -67,45 +67,48 @@ export default function PainPointsPAS() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="glass-card-pro rounded-2xl overflow-hidden border border-white/12 hover:border-brand-orange/50 transition-all duration-300 flex flex-col justify-between group shadow-lg hover:shadow-xl"
+              className="glass-card-pro rounded-3xl p-6 sm:p-7 border border-white/12 hover:border-brand-orange/50 transition-all duration-300 flex flex-col sm:flex-row items-start gap-6 group shadow-lg hover:shadow-2xl relative"
             >
-              {/* Clean Image Canvas: Generous Horizontal Proportions */}
-              <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-dark-950">
+              {/* Compact 1:1 Square Image Frame */}
+              <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 aspect-square shrink-0 rounded-2xl overflow-hidden bg-dark-950 border border-white/15 shadow-md relative mx-auto sm:mx-0">
                 <img
                   src={card.image}
                   alt={card.problemHeadline}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#161922] via-[#161922]/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
               </div>
 
-              {/* Card Body */}
-              <div className="p-6 sm:p-7 space-y-3 flex-grow relative z-10">
-                <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-amber-400 transition-colors leading-snug">
-                  {card.problemHeadline}
-                </h3>
+              {/* Large, Prominent Text Body */}
+              <div className="flex flex-col justify-between flex-grow space-y-3.5 text-left w-full">
+                <div className="space-y-2">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-white group-hover:text-amber-400 transition-colors leading-snug">
+                    {card.problemHeadline}
+                  </h3>
 
-                <div className="flex items-start gap-2.5 pt-1 text-slate-300 text-xs sm:text-sm leading-relaxed">
-                  <CheckCircle2 className="w-4 h-4 text-brand-orange shrink-0 mt-0.5" />
-                  <p>
-                    <strong className="text-white font-semibold block mb-0.5">Die Pro Colour Lösung:</strong>
-                    {card.solutionText}
-                  </p>
+                  <div className="text-slate-200 text-sm sm:text-base leading-relaxed pt-1">
+                    <span className="text-amber-400 font-bold flex items-center gap-1.5 mb-1">
+                      <CheckCircle2 className="w-4 h-4 text-brand-orange shrink-0" />
+                      <span>Die Pro Colour Lösung:</span>
+                    </span>
+                    <p className="text-slate-300">
+                      {card.solutionText}
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              {/* Card Footer Action */}
-              <div className="px-6 sm:px-7 pb-5 pt-3 border-t border-white/10 flex items-center justify-between">
-                <span className="text-xs text-slate-400">Unverbindliche Ersteinschätzung</span>
-                <a
-                  href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20eine%20Anfrage%20zu:%20${encodeURIComponent(card.problemHeadline)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-400 hover:text-white transition-colors group/link"
-                >
-                  <span>{card.linkText}</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-brand-orange group-hover/link:translate-x-1 transition-transform" />
-                </a>
+                {/* Card Action Link */}
+                <div className="pt-2 border-t border-white/10 flex items-center justify-start">
+                  <a
+                    href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20eine%20Anfrage%20zu:%20${encodeURIComponent(card.problemHeadline)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-amber-400 hover:text-white transition-colors group/link"
+                  >
+                    <span>{card.linkText}</span>
+                    <ArrowRight className="w-4 h-4 text-brand-orange group-hover/link:translate-x-1 transition-transform" />
+                  </a>
+                </div>
               </div>
 
             </motion.div>
