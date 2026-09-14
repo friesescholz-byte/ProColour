@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import PainPointsPAS from './components/PainPointsPAS.jsx';
@@ -9,8 +9,27 @@ import Partners from './components/Partners.jsx';
 import GoogleReviews from './components/GoogleReviews.jsx';
 import ContactSection from './components/ContactSection.jsx';
 import Footer from './components/Footer.jsx';
+import AdminPortal from './components/admin/AdminPortal.jsx';
 
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(
+    typeof window !== 'undefined' ? window.location.pathname : '/'
+  );
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
+  // Render Admin Portal if visiting /admin
+  if (currentPath === '/admin' || currentPath === '/admin/') {
+    return <AdminPortal />;
+  }
+
   return (
     <div className="min-h-screen bg-[#12151C] text-slate-100 flex flex-col font-sans selection:bg-brand-orange selection:text-white">
       {/* Top Navbar */}

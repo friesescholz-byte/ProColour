@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Star, ExternalLink, MapPin, Phone, Mail, Clock, X, ArrowUp, ShieldCheck, Accessibility } from 'lucide-react';
+import { Star, ExternalLink, MapPin, Phone, Mail, Clock, X, ArrowUp, ShieldCheck, Accessibility, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Footer() {
@@ -130,6 +130,14 @@ export default function Footer() {
                 <Accessibility className="w-3.5 h-3.5 text-brand-orange" />
                 <span>Erklärung zur Barrierefreiheit</span>
               </button>
+              <a
+                href="/admin"
+                className="hover:text-amber-400 text-slate-500 hover:underline cursor-pointer flex items-center gap-1 transition-colors"
+                title="Admin-Bereich (Passwortgeschützt)"
+              >
+                <Lock className="w-3 h-3 text-slate-500" />
+                <span>Admin</span>
+              </a>
               <button
                 onClick={scrollToTop}
                 className="p-2 rounded-xl bg-black/60 border border-white/15 text-slate-300 hover:text-white hover:border-brand-orange transition-all cursor-pointer"

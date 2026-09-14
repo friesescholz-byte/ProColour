@@ -1,59 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sparkles, Eye, ArrowRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getShowcaseProjects } from '../utils/showcaseStorage.js';
+import { SHOWCASE_CATEGORIES } from '../data/initialShowcaseProjects.js';
 
 export default function BeforeAfterShowcase() {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [projects, setProjects] = useState([]);
 
-  const [toggleState, setToggleState] = useState({
-    0: 'after',
-    1: 'after',
-    2: 'after'
-  });
-
+  const [toggleState, setToggleState] = useState({});
   const [modalItem, setModalItem] = useState(null);
 
-  const beforeAfterPairs = [
-    {
-      id: 'leder',
-      category: 'leder',
-      title: 'Leder-Aufbereitung & Nachfärbung',
-      desc: 'Rissiges und abgenutztes Leder fachgerecht instandgesetzt, tiefengereinigt, nachgefärbt und neu versiegelt.',
-      before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(25)_ergebnis.webp',
-      after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(24)_ergebnis.webp'
-    },
-    {
-      id: 'aussenspiegel',
-      category: 'lack',
-      title: 'Außenspiegel & Kleinteile-Lackierung',
-      desc: 'Tiefe Schrammen und Kratzer an der Spiegelkappe punktgenau beilackiert – 100% Farbangleich ohne Neukauf.',
-      before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(22)_ergebnis.webp',
-      after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(23)_ergebnis.webp'
-    },
-    {
-      id: 'stossstange',
-      category: 'stossstange',
-      title: 'Stoßstangenschaden ohne Teiletausch',
-      desc: 'Schrammen am Stoßfänger direkt am Fahrzeug behoben – Originallack erhalten, meist am selben Tag fertig.',
-      before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(12)_ergebnis.webp',
-      after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(13)_ergebnis.webp'
-    }
-  ];
+  useEffect(() => {
+    // Initial load
+    setProjects(getShowcaseProjects());
 
-  const categories = [
-    { id: 'all', name: 'Alle Arbeiten' },
-    { id: 'leder', name: 'Leder & Interieur' },
-    { id: 'lack', name: 'Spot-Repair Lack' },
-    { id: 'stossstange', name: 'Stoßstangen' },
-    { id: 'felgen', name: 'Alufelgen & WheelDoctor' },
-    { id: 'dellen', name: 'Dellen & Hagel (DoL)' }
-  ];
+    // Listen to admin updates in real-time
+    const handleUpdate = (e) => {
+      if (e.detail) {
+        setProjects(e.detail);
+      }
+    };
+    window.addEventListener('procolour:showcase-updated', handleUpdate);
+    return () => window.removeEventListener('procolour:showcase-updated', handleUpdate);
+  }, []);
 
-  const handleToggle = (index, state) => {
-    setToggleState((prev) => ({ ...prev, [index]: state }));
+  const handleToggle = (id, state) => {
+    setToggleState((prev) => ({ ...prev, [id]: state }));
   };
 
-  const filteredPairs = beforeAfterPairs.filter((p) => {
+  const filteredPairs = projects.filter((p) => {
     if (activeFilter === 'all') return true;
     return p.category === activeFilter;
   });
@@ -84,7 +60,7 @@ export default function BeforeAfterShowcase() {
 
         {/* Category Filter Pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-10 sm:mb-12">
-          {categories.map((cat) => (
+          {SHOWCASE_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveFilter(cat.id)}
@@ -99,10 +75,10 @@ export default function BeforeAfterShowcase() {
           ))}
         </div>
 
-        {/* 3 Main Before/After Pairs Grid */}
+        {/* Dynamic Before/After Pairs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
           {filteredPairs.map((item, idx) => {
-            const currentMode = toggleState[idx] || 'after';
+            const currentMode = toggleState[item.id] || 'after';
             const displayImage = currentMode === 'before' ? item.before : item.after;
 
             return (
@@ -139,7 +115,7 @@ export default function BeforeAfterShowcase() {
                   <div className="absolute bottom-3 left-3 z-20">
                     <div className="flex bg-black/85 backdrop-blur-xl p-1 rounded-lg border border-white/15 shadow-lg">
                       <button
-                        onClick={() => handleToggle(idx, 'before')}
+                        onClick={() => handleToggle(item.id, 'before')}
                         className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
                           currentMode === 'before'
                             ? 'bg-red-600 text-white shadow-sm'
@@ -149,7 +125,7 @@ export default function BeforeAfterShowcase() {
                         Vorher
                       </button>
                       <button
-                        onClick={() => handleToggle(idx, 'after')}
+                        onClick={() => handleToggle(item.id, 'after')}
                         className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
                           currentMode === 'after'
                             ? 'bg-emerald-600 text-white shadow-sm'
