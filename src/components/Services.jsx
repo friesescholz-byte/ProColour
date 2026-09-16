@@ -174,7 +174,7 @@ export default function Services() {
                   href="https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20ein%20Vorab-Gutachten%20f%C3%BCr%20meine%20Leasing-R%C3%BCckgabe%20anfragen."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-brand-orange to-amber-500 hover:from-amber-500 hover:to-brand-orange text-white font-bold text-xs sm:text-sm shadow-lg hover:shadow-brand-orange/25 transition-all duration-300 active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-gradient-to-r from-brand-orange to-amber-500 hover:from-amber-500 hover:to-brand-orange text-white font-bold text-xs sm:text-sm shadow-lg hover:shadow-brand-orange/25 transition-all duration-300 active:scale-95"
                 >
                   <FileCheck2 className="w-4 h-4" />
                   <span>Leasing-Gutachten anfragen</span>

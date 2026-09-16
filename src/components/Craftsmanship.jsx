@@ -41,7 +41,7 @@ export default function Craftsmanship() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-6 relative"
           >
-            <div className="relative w-full h-[400px] sm:h-[480px] lg:h-[520px] rounded-3xl overflow-hidden bg-dark-950 border border-white/20 shadow-2xl group">
+            <div className="relative w-full h-[260px] sm:h-[400px] lg:h-[520px] rounded-2xl sm:rounded-3xl overflow-hidden bg-dark-950 border border-white/20 shadow-2xl group">
               <img
                 src={teamImage}
                 alt="Pro Colour Smart Repair Handwerk & Team"
@@ -63,7 +63,7 @@ export default function Craftsmanship() {
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-orange block mb-2">
                 Handwerk & Historie
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 Leidenschaft für Perfektion <br />
                 <span className="text-gradient-orange">seit über 10 Jahren.</span>
               </h2>

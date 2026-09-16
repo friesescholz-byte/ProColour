@@ -74,21 +74,21 @@ export default function Partners() {
         <div className="relative w-full overflow-hidden py-3">
           
           {/* Edge Fade Gradients */}
-          <div className="absolute inset-y-0 left-0 w-24 sm:w-40 bg-gradient-to-r from-[#0A0D14] to-transparent z-20 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-24 sm:w-40 bg-gradient-to-l from-[#0A0D14] to-transparent z-20 pointer-events-none"></div>
+          <div className="absolute inset-y-0 left-0 w-8 sm:w-24 lg:w-40 bg-gradient-to-r from-[#0A0D14] to-transparent z-20 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-8 sm:w-24 lg:w-40 bg-gradient-to-l from-[#0A0D14] to-transparent z-20 pointer-events-none"></div>
 
           {/* Marquee Track */}
-          <div className="animate-marquee items-center gap-8 sm:gap-14">
+          <div className="animate-marquee items-center gap-6 sm:gap-14">
             {duplicatedLogos.map((item, idx) => (
               <div
                 key={`${item.id}-${idx}`}
-                className="flex items-center justify-center px-4 sm:px-6 shrink-0 opacity-80 hover:opacity-100 transition-all duration-300 group cursor-default"
+                className="flex items-center justify-center px-3 sm:px-6 shrink-0 opacity-80 hover:opacity-100 transition-all duration-300 group cursor-default"
                 title={item.name}
               >
                 <img
                   src={item.src}
                   alt={item.name}
-                  className="h-8 sm:h-11 w-auto max-w-[140px] sm:max-w-[180px] object-contain transition-transform duration-300 group-hover:scale-105 select-none pointer-events-none drop-shadow-sm"
+                  className="h-7 sm:h-10 w-auto max-w-[110px] sm:max-w-[175px] object-contain transition-transform duration-300 group-hover:scale-105 select-none pointer-events-none drop-shadow-sm"
                   loading="lazy"
                 />
               </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Eye, ArrowRight, X } from 'lucide-react';
+import { Sparkles, Eye, ArrowRight, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getShowcaseProjects } from '../utils/showcaseStorage.js';
 import { SHOWCASE_CATEGORIES } from '../data/initialShowcaseProjects.js';
@@ -7,6 +7,7 @@ import { SHOWCASE_CATEGORIES } from '../data/initialShowcaseProjects.js';
 export default function BeforeAfterShowcase() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [projects, setProjects] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(3);
 
   const [toggleState, setToggleState] = useState({});
   const [modalItem, setModalItem] = useState(null);
@@ -29,10 +30,17 @@ export default function BeforeAfterShowcase() {
     setToggleState((prev) => ({ ...prev, [id]: state }));
   };
 
+  const handleFilterChange = (catId) => {
+    setActiveFilter(catId);
+    setVisibleCount(3);
+  };
+
   const filteredPairs = projects.filter((p) => {
     if (activeFilter === 'all') return true;
     return p.category === activeFilter;
   });
+
+  const displayedPairs = filteredPairs.slice(0, visibleCount);
 
   return (
     <section id="results" className="py-18 md:py-24 bg-paint-nardo border-b border-white/10 relative overflow-hidden">
@@ -58,13 +66,13 @@ export default function BeforeAfterShowcase() {
           </p>
         </div>
 
-        {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-10 sm:mb-12">
+        {/* Category Filter Pills (Scrollable on mobile, wrapped on desktop) */}
+        <div className="flex -mx-4 px-4 sm:mx-0 sm:px-0 flex-nowrap overflow-x-auto sm:flex-wrap items-center sm:justify-center gap-2 mb-8 sm:mb-12 pb-2 sm:pb-0 scrollbar-none">
           {SHOWCASE_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => setActiveFilter(cat.id)}
-              className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              onClick={() => handleFilterChange(cat.id)}
+              className={`px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 activeFilter === cat.id
                   ? 'bg-gradient-to-r from-brand-orange to-amber-500 text-white shadow-md shadow-brand-orange/20 scale-105'
                   : 'bg-black/40 hover:bg-black/60 text-slate-300 hover:text-white border border-white/10'
@@ -75,9 +83,9 @@ export default function BeforeAfterShowcase() {
           ))}
         </div>
 
-        {/* Dynamic Before/After Pairs Grid */}
+        {/* Dynamic Before/After Pairs Grid (Max 3 initially) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
-          {filteredPairs.map((item, idx) => {
+          {displayedPairs.map((item, idx) => {
             const currentMode = toggleState[item.id] || 'after';
             const displayImage = currentMode === 'before' ? item.before : item.after;
 
@@ -167,6 +175,22 @@ export default function BeforeAfterShowcase() {
           })}
         </div>
 
+        {/* Load More Button (3 at a time) */}
+        {filteredPairs.length > visibleCount && (
+          <div className="text-center pt-8 sm:pt-10">
+            <button
+              onClick={() => setVisibleCount((prev) => prev + 3)}
+              className="btn-3d-luxury px-6 py-3 rounded-xl text-white text-xs sm:text-sm font-bold inline-flex items-center gap-2 cursor-pointer shadow-lg hover:scale-105 transition-all"
+            >
+              <span>Weitere {Math.min(3, filteredPairs.length - visibleCount)} Ergebnisse laden</span>
+              <ChevronDown className="w-4 h-4 text-brand-orange" />
+            </button>
+            <p className="text-xs text-slate-400 mt-2">
+              {displayedPairs.length} von {filteredPairs.length} Projekten angezeigt
+            </p>
+          </div>
+        )}
+
       </div>
 
       {/* Lightbox / Zoom Modal */}
@@ -184,7 +208,7 @@ export default function BeforeAfterShowcase() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 16 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-3xl w-full bg-[#161922] border border-white/20 rounded-2xl overflow-hidden shadow-2xl space-y-3.5 p-5 sm:p-6"
+              className="relative max-w-3xl w-full bg-[#161922] border border-white/20 rounded-2xl overflow-hidden shadow-2xl space-y-3.5 p-4 sm:p-6 max-h-[92vh] overflow-y-auto"
             >
               <button
                 onClick={() => setModalItem(null)}
@@ -195,7 +219,7 @@ export default function BeforeAfterShowcase() {
               </button>
 
               <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">{modalItem.title}</h3>
+                <h3 className="text-lg sm:text-2xl font-bold text-white pr-8">{modalItem.title}</h3>
                 <p className="text-slate-300 text-xs sm:text-sm mt-0.5 leading-relaxed">{modalItem.desc}</p>
               </div>
 
@@ -230,13 +254,13 @@ export default function BeforeAfterShowcase() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-1">
-                <span className="text-xs text-slate-400">100% zertifizierte Fachqualität</span>
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+                <span className="text-xs text-slate-400 hidden sm:inline">100% zertifizierte Fachqualität</span>
                 <a
                   href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20habe%20eine%20Preisanfrage%20zu:%20${encodeURIComponent(modalItem.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-3d-luxury inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white text-xs font-bold cursor-pointer"
+                  className="btn-3d-luxury w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-white text-xs font-bold cursor-pointer"
                 >
                   <span>Gleichen Schaden per WhatsApp anfragen</span>
                   <ArrowRight className="w-3.5 h-3.5" />

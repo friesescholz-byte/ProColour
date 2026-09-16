@@ -59,7 +59,7 @@ export default function PainPointsPAS() {
         </div>
 
         {/* 4 Clean Visual Cards: Compact 1:1 Images with Large Prominent Typography */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8">
           {cards.map((card, idx) => (
             <motion.div
               key={card.id}
@@ -67,10 +67,10 @@ export default function PainPointsPAS() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="glass-card-pro rounded-3xl p-6 sm:p-7 border border-white/12 hover:border-brand-orange/50 transition-all duration-300 flex flex-col sm:flex-row items-start gap-6 group shadow-lg hover:shadow-2xl relative"
+              className="glass-card-pro rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-white/12 hover:border-brand-orange/50 transition-all duration-300 flex flex-col sm:flex-row items-start gap-4 sm:gap-6 group shadow-lg hover:shadow-2xl relative"
             >
               {/* Compact 1:1 Square Image Frame */}
-              <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 aspect-square shrink-0 rounded-2xl overflow-hidden bg-dark-950 border border-white/15 shadow-md relative mx-auto sm:mx-0">
+              <div className="w-24 h-24 sm:w-36 sm:h-36 md:w-40 md:h-40 aspect-square shrink-0 rounded-xl sm:rounded-2xl overflow-hidden bg-dark-950 border border-white/15 shadow-md relative mx-0">
                 <img
                   src={card.image}
                   alt={card.problemHeadline}
@@ -80,13 +80,13 @@ export default function PainPointsPAS() {
               </div>
 
               {/* Large, Prominent Text Body */}
-              <div className="flex flex-col justify-between flex-grow space-y-3.5 text-left w-full">
-                <div className="space-y-2">
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-white group-hover:text-amber-400 transition-colors leading-snug">
+              <div className="flex flex-col justify-between flex-grow space-y-3 text-left w-full">
+                <div className="space-y-1.5 sm:space-y-2">
+                  <h3 className="text-lg sm:text-2xl font-extrabold text-white group-hover:text-amber-400 transition-colors leading-snug">
                     {card.problemHeadline}
                   </h3>
 
-                  <div className="text-slate-200 text-sm sm:text-base leading-relaxed pt-1">
+                  <div className="text-slate-200 text-xs sm:text-base leading-relaxed pt-0.5">
                     <span className="text-amber-400 font-bold flex items-center gap-1.5 mb-1">
                       <CheckCircle2 className="w-4 h-4 text-brand-orange shrink-0" />
                       <span>Die Pro Colour Lösung:</span>

@@ -13,11 +13,12 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Ergebnisse', href: '#results' },
+    { name: 'Partner', href: '#partners' },
     { name: 'Warum wir?', href: '#pas-problems' },
+    { name: 'Ergebnisse', href: '#results' },
     { name: 'Leistungen', href: '#services' },
     { name: 'Handwerk & Team', href: '#craftsmanship' },
-    { name: 'Partner', href: '#partners' },
+    { name: 'Bewertungen', href: '#reviews' },
     { name: 'Kontakt', href: '#contact' },
   ];
 
@@ -25,8 +26,8 @@ export default function Navbar() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#141210]/90 backdrop-blur-xl border-b border-white/15 py-3 shadow-2xl'
-          : 'bg-[#141210]/40 backdrop-blur-sm py-4 sm:py-5 border-b border-white/5'
+          ? 'bg-[#141210]/95 backdrop-blur-xl border-b border-white/15 py-2.5 sm:py-3 shadow-2xl'
+          : 'bg-[#141210]/60 backdrop-blur-md py-3 sm:py-5 border-b border-white/10'
       }`}
     >
       <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between">
@@ -43,12 +44,12 @@ export default function Navbar() {
         </div>
 
         {/* Center: Clean Editorial Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-8">
+        <nav className="hidden lg:flex items-center space-x-5 xl:space-x-7">
           {navLinks.map((l) => (
             <a
               key={l.name}
               href={l.href}
-              className="text-sm font-semibold tracking-wide text-slate-200 hover:text-white transition-colors relative py-1 group"
+              className="text-xs xl:text-sm font-semibold tracking-wide text-slate-200 hover:text-white transition-colors relative py-1 group"
             >
               {l.name}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-brand-orange to-amber-400 transition-all duration-300 group-hover:w-full"></span>
@@ -57,10 +58,10 @@ export default function Navbar() {
         </nav>
 
         {/* Right: Direct Phone & Luxury CTA */}
-        <div className="hidden sm:flex items-center gap-4">
+        <div className="hidden sm:flex items-center gap-3 xl:gap-4">
           <a
             href="tel:01702025130"
-            className="text-xs sm:text-sm font-extrabold text-slate-200 hover:text-white px-3.5 py-2 rounded-xl transition-colors flex items-center gap-2"
+            className="text-xs sm:text-sm font-extrabold text-slate-200 hover:text-white px-3 py-2 rounded-xl transition-colors flex items-center gap-2"
           >
             <div className="w-8 h-8 rounded-lg bg-brand-orange/20 border border-brand-orange/30 flex items-center justify-center text-brand-orange">
               <Phone className="w-4 h-4" />
@@ -72,7 +73,7 @@ export default function Navbar() {
             href="https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20ein%20Schadensfoto%20f%C3%BCr%20eine%20Preiseinsch%C3%A4tzung%20senden."
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-eyecatcher inline-flex items-center gap-2.5 text-white text-xs sm:text-sm font-black px-5 py-2.5 rounded-xl cursor-pointer shadow-lg hover:shadow-brand-orange/30 transition-all"
+            className="btn-eyecatcher inline-flex items-center gap-2 text-white text-xs sm:text-sm font-black px-4 xl:px-5 py-2.5 rounded-xl cursor-pointer shadow-lg hover:shadow-brand-orange/30 transition-all"
           >
             <MessageSquare className="w-4 h-4 fill-current" />
             <span>Foto per WhatsApp</span>
@@ -86,6 +87,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="p-2.5 rounded-xl bg-brand-orange text-white sm:hidden shadow-md"
+            aria-label="WhatsApp Nachricht senden"
           >
             <MessageSquare className="w-4 h-4" />
           </a>
@@ -107,7 +109,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#141210]/95 backdrop-blur-2xl border-b border-white/10 px-6 pt-4 pb-8 space-y-4 shadow-2xl"
+            className="lg:hidden bg-[#141210]/98 backdrop-blur-2xl border-b border-white/10 px-5 sm:px-6 pt-3 pb-7 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto"
           >
             {navLinks.map((l) => (
               <a

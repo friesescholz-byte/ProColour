@@ -339,25 +339,7 @@ export default function AdminPortal() {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5">
-            <button
-              onClick={handleExportJson}
-              title="JSON-Backup herunterladen"
-              className="px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 text-xs font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Backup exportieren</span>
-            </button>
-
-            <button
-              onClick={handleReset}
-              title="Auf 3 Standard-Projekte zurücksetzen"
-              className="px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 text-xs font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Standard laden</span>
-            </button>
-
+          <div className="flex items-center gap-2.5">
             <button
               onClick={openNewProjectModal}
               className="btn-3d-luxury px-4 py-2 rounded-xl text-white text-xs sm:text-sm font-bold flex items-center gap-2 cursor-pointer shadow-lg"
