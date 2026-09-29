@@ -1,51 +1,140 @@
 import React from 'react';
 
 export default function Partners() {
+  const r2Base = 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Partner';
+
   const partnerLogos = [
     {
-      id: 'autogerken',
-      name: 'AutoGerken',
-      src: '/partners/partner_01.webp'
-    },
-    {
-      id: 'bosch-service',
-      name: 'Bosch Service',
-      src: '/partners/partner_02.webp'
-    },
-    {
-      id: 'brandt-eggers',
-      name: 'Brandt Eggers',
-      src: '/partners/partner_03.webp'
+      id: 'schmolke',
+      name: 'Autocenter Schmolke (Osterholz-Scharmbeck)',
+      src: `${r2Base}/partner_schmolke.svg`,
+      local: '/partners/partner_schmolke.svg'
     },
     {
       id: 'anders-gruppe',
-      name: 'Anders Gruppe',
-      src: '/partners/partner_04.webp'
+      name: 'Autohaus Anders GmbH (Achim, Nienburg, Verden, Syke)',
+      src: `${r2Base}/partner_04.webp`,
+      local: '/partners/partner_04.webp'
     },
     {
-      id: 'luebbering',
-      name: 'Kfz-Haus Lübbering',
-      src: '/partners/partner_05.webp'
-    },
-    {
-      id: 'autohaus-wirth',
-      name: 'Autohaus Wirth',
-      src: '/partners/partner_06.webp'
-    },
-    {
-      id: 'auto-brinkmann',
-      name: 'Auto Brinkmann',
-      src: '/partners/partner_07.webp'
+      id: 'bobrink',
+      name: 'Autohaus Bobrink (Grasberg)',
+      src: `${r2Base}/partner_bobrink.webp`,
+      local: '/partners/partner_bobrink.webp'
     },
     {
       id: 'sternpartner',
-      name: 'SternPartner',
-      src: '/partners/partner_09.webp'
+      name: 'Sternpartner SE & Co.KG (Zeven)',
+      src: `${r2Base}/partner_09.webp`,
+      local: '/partners/partner_09.webp'
+    },
+    {
+      id: 'freese',
+      name: 'Freese Süd GmbH (Syke)',
+      src: `${r2Base}/partner_freese.svg`,
+      local: '/partners/partner_freese.svg'
+    },
+    {
+      id: 'brandt-eggers',
+      name: 'Brandt Eggers GmbH (Achim, Weyhe)',
+      src: `${r2Base}/partner_03.webp`,
+      local: '/partners/partner_03.webp'
+    },
+    {
+      id: 'gruenhagen',
+      name: 'Autohaus Grünhagen GmbH & Co.KG (Hoya)',
+      src: `${r2Base}/partner_gruenhagen.webp`,
+      local: '/partners/partner_gruenhagen.webp'
+    },
+    {
+      id: 'rathkamp',
+      name: 'Autohaus Rathkamp GmbH & Co.KG (Syke)',
+      src: `${r2Base}/partner_rathkamp.webp`,
+      local: '/partners/partner_rathkamp.webp'
+    },
+    {
+      id: 'autogerken',
+      name: 'Auto Gerken GmbH (Martfeld)',
+      src: `${r2Base}/partner_01.webp`,
+      local: '/partners/partner_01.webp'
+    },
+    {
+      id: 'logemann',
+      name: 'Automobile Logemann (Schwaförden)',
+      src: `${r2Base}/partner_logemann.svg`,
+      local: '/partners/partner_logemann.svg'
     },
     {
       id: 'autohaus-suedring',
-      name: 'Autohaus Südring',
-      src: '/partners/partner_10.webp'
+      name: 'Autohaus Südring GmbH (Sulingen)',
+      src: `${r2Base}/partner_10.webp`,
+      local: '/partners/partner_10.webp'
+    },
+    {
+      id: 'nobbe',
+      name: 'Autohaus Nobbe GmbH (Sulingen)',
+      src: `${r2Base}/partner_nobbe.webp`,
+      local: '/partners/partner_nobbe.webp'
+    },
+    {
+      id: 'habighorst',
+      name: 'Autohaus Habighorst GmbH & Co.KG (Sulingen)',
+      src: `${r2Base}/partner_habighorst.webp`,
+      local: '/partners/partner_habighorst.webp'
+    },
+    {
+      id: 'autohaus-wirth',
+      name: 'Autohaus Wirth e.K. (Sudwalde)',
+      src: `${r2Base}/partner_06.webp`,
+      local: '/partners/partner_06.webp'
+    },
+    {
+      id: 'becker',
+      name: 'Autohaus Becker (Grasberg)',
+      src: `${r2Base}/partner_becker.webp`,
+      local: '/partners/partner_becker.webp'
+    },
+    {
+      id: 'bw-achim',
+      name: 'Autohandel B+W GmbH (Achim)',
+      src: `${r2Base}/partner_bw_achim.webp`,
+      local: '/partners/partner_bw_achim.webp'
+    },
+    {
+      id: 'juergens',
+      name: 'Autohandel Jürgens (Twistringen)',
+      src: `${r2Base}/partner_juergens.webp`,
+      local: '/partners/partner_juergens.webp'
+    },
+    {
+      id: 'bosch-service',
+      name: 'Bosch Car Service Bassum',
+      src: `${r2Base}/partner_02.webp`,
+      local: '/partners/partner_02.webp'
+    },
+    {
+      id: 'luebbering',
+      name: 'Lübbering das Kfz Haus GmbH (Schwaförden)',
+      src: `${r2Base}/partner_05.webp`,
+      local: '/partners/partner_05.webp'
+    },
+    {
+      id: 'fritz',
+      name: 'Fahrzeugtechnik Andreas Fritz (Bruchhausen-Vilsen)',
+      src: `${r2Base}/partner_fritz.webp`,
+      local: '/partners/partner_fritz.webp'
+    },
+    {
+      id: 'peppermint',
+      name: 'Peppermint Collection (Syke)',
+      src: `${r2Base}/partner_peppermint.webp`,
+      local: '/partners/partner_peppermint.webp'
+    },
+    {
+      id: 'schwarme',
+      name: 'Fahrzeugtechnik Schwarme',
+      src: `${r2Base}/partner_schwarme.webp`,
+      local: '/partners/partner_schwarme.webp'
     }
   ];
 
@@ -87,6 +176,12 @@ export default function Partners() {
               >
                 <img
                   src={item.src}
+                  onError={(e) => {
+                    if (item.local && !e.currentTarget.dataset.fallback) {
+                      e.currentTarget.dataset.fallback = 'true';
+                      e.currentTarget.src = item.local;
+                    }
+                  }}
                   alt={item.name}
                   className="h-7 sm:h-10 w-auto max-w-[110px] sm:max-w-[175px] object-contain transition-transform duration-300 group-hover:scale-105 select-none pointer-events-none drop-shadow-sm"
                   loading="lazy"
