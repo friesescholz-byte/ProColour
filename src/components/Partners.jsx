@@ -53,6 +53,18 @@ export default function Partners() {
       local: '/partners/partner_rathkamp.webp'
     },
     {
+      id: 'autohaus-nienburg',
+      name: 'Autohaus Nienburg GbR',
+      src: `${r2Base}/partner_autohaus_nienburg.webp`,
+      local: '/partners/partner_autohaus_nienburg.webp'
+    },
+    {
+      id: 'syker-automobile',
+      name: 'Syker Automobile GmbH',
+      src: `${r2Base}/partner_syker_automobile.webp`,
+      local: '/partners/partner_syker_automobile.webp'
+    },
+    {
       id: 'autogerken',
       name: 'Auto Gerken GmbH (Martfeld)',
       src: `${r2Base}/partner_01.webp`,

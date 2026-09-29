@@ -1,12 +1,12 @@
 export const initialShowcaseProjects = [
   {
-    id: 'leder-aufbereitung',
+    id: 'leder-rueckseite-fahrersitz',
     category: 'leder',
-    title: 'Leder-Aufbereitung & Nachfärbung',
-    desc: 'Rissiges und abgenutztes Leder fachgerecht instandgesetzt, tiefengereinigt, nachgefärbt und neu versiegelt.',
-    before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(25)_ergebnis.webp',
-    after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(24)_ergebnis.webp',
-    createdAt: '2026-09-01T10:00:00.000Z'
+    title: 'Rückseite Fahrersitz: Fleck- & Farbinstandsetzung',
+    desc: 'Tiefe Flecken, Druckstellen und Verfärbungen am hellen Leder fachgerecht entfernt, exakt beilackiert und werksgetreu versiegelt.',
+    before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/leder_fahrersitz_vorher.webp',
+    after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/leder_fahrersitz_nachher.webp',
+    createdAt: '2026-09-04T10:00:00.000Z'
   },
   {
     id: 'aussenspiegel-lackierung',
@@ -25,6 +25,15 @@ export const initialShowcaseProjects = [
     before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(12)_ergebnis.webp',
     after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(13)_ergebnis.webp',
     createdAt: '2026-09-03T10:00:00.000Z'
+  },
+  {
+    id: 'leder-aufbereitung',
+    category: 'leder',
+    title: 'Leder-Aufbereitung & Nachfärbung',
+    desc: 'Rissiges und abgenutztes Leder fachgerecht instandgesetzt, tiefengereinigt, nachgefärbt und neu versiegelt.',
+    before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(25)_ergebnis.webp',
+    after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(24)_ergebnis.webp',
+    createdAt: '2026-09-01T10:00:00.000Z'
   }
 ];
 

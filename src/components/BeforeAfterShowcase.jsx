@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Eye, ArrowRight, X, ChevronDown } from 'lucide-react';
+import { Sparkles, Eye, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getShowcaseProjects } from '../utils/showcaseStorage.js';
 import { SHOWCASE_CATEGORIES } from '../data/initialShowcaseProjects.js';
@@ -7,7 +7,8 @@ import { SHOWCASE_CATEGORIES } from '../data/initialShowcaseProjects.js';
 export default function BeforeAfterShowcase() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [projects, setProjects] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 3;
 
   const [toggleState, setToggleState] = useState({});
   const [modalItem, setModalItem] = useState(null);
@@ -32,7 +33,7 @@ export default function BeforeAfterShowcase() {
 
   const handleFilterChange = (catId) => {
     setActiveFilter(catId);
-    setVisibleCount(3);
+    setCurrentPage(1);
   };
 
   const filteredPairs = projects.filter((p) => {
@@ -40,7 +41,18 @@ export default function BeforeAfterShowcase() {
     return p.category === activeFilter;
   });
 
-  const displayedPairs = filteredPairs.slice(0, visibleCount);
+  const totalPages = Math.ceil(filteredPairs.length / ITEMS_PER_PAGE) || 1;
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const displayedPairs = filteredPairs.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const goToPage = (page) => {
+    const targetPage = Math.max(1, Math.min(page, totalPages));
+    setCurrentPage(targetPage);
+    const el = document.getElementById('results');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <section id="results" className="py-18 md:py-24 bg-paint-nardo border-b border-white/10 relative overflow-hidden">
@@ -175,19 +187,61 @@ export default function BeforeAfterShowcase() {
           })}
         </div>
 
-        {/* Load More Button (3 at a time) */}
-        {filteredPairs.length > visibleCount && (
-          <div className="text-center pt-8 sm:pt-10">
-            <button
-              onClick={() => setVisibleCount((prev) => prev + 3)}
-              className="btn-3d-luxury px-6 py-3 rounded-xl text-white text-xs sm:text-sm font-bold inline-flex items-center gap-2 cursor-pointer shadow-lg hover:scale-105 transition-all"
-            >
-              <span>Weitere {Math.min(3, filteredPairs.length - visibleCount)} Ergebnisse laden</span>
-              <ChevronDown className="w-4 h-4 text-brand-orange" />
-            </button>
-            <p className="text-xs text-slate-400 mt-2">
-              {displayedPairs.length} von {filteredPairs.length} Projekten angezeigt
-            </p>
+        {/* Pagination Controls (Always 3 at a time) */}
+        {totalPages > 1 && (
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-10 sm:pt-12 border-t border-white/10 mt-10">
+            <div className="text-xs sm:text-sm text-slate-400 order-2 sm:order-1 text-center sm:text-left">
+              Ergebnisse <span className="font-semibold text-white">{startIndex + 1}–{Math.min(startIndex + ITEMS_PER_PAGE, filteredPairs.length)}</span> von <span className="font-semibold text-white">{filteredPairs.length}</span> Arbeiten (Seite {currentPage} von {totalPages})
+            </div>
+
+            <div className="flex items-center gap-2 order-1 sm:order-2">
+              {/* Previous Page Button */}
+              <button
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 1}
+                aria-label="Vorherige Seite"
+                className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                  currentPage === 1
+                    ? 'opacity-30 cursor-not-allowed bg-black/20 text-slate-500 border border-white/5'
+                    : 'bg-black/50 hover:bg-black/80 text-white border border-white/15 hover:border-brand-orange/40 hover:scale-105 active:scale-95 shadow-md'
+                }`}
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span className="hidden xs:inline">Vorherige</span>
+              </button>
+
+              {/* Numbered Page Buttons */}
+              <div className="flex items-center gap-1.5">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                  <button
+                    key={pageNum}
+                    onClick={() => goToPage(pageNum)}
+                    className={`w-9 h-9 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center ${
+                      currentPage === pageNum
+                        ? 'bg-gradient-to-r from-brand-orange to-amber-500 text-white shadow-lg shadow-brand-orange/25 scale-105'
+                        : 'bg-black/40 hover:bg-black/70 text-slate-300 hover:text-white border border-white/10'
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                ))}
+              </div>
+
+              {/* Next Page Button */}
+              <button
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                aria-label="Nächste Seite"
+                className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                  currentPage === totalPages
+                    ? 'opacity-30 cursor-not-allowed bg-black/20 text-slate-500 border border-white/5'
+                    : 'bg-gradient-to-r from-brand-orange to-amber-500 text-white shadow-md shadow-brand-orange/20 hover:scale-105 active:scale-95 border border-amber-400/30'
+                }`}
+              >
+                <span>Nächste Seite</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         )}
 

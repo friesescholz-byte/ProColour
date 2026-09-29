@@ -1,6 +1,6 @@
 import { initialShowcaseProjects } from '../data/initialShowcaseProjects.js';
 
-const STORAGE_KEY = 'procolour_before_after_projects';
+const STORAGE_KEY = 'procolour_before_after_projects_v4';
 const AUTH_KEY = 'procolour_admin_auth';
 export const ADMIN_DEFAULT_PASSWORD = 'procolour2026!';
 
@@ -76,7 +76,20 @@ export function getShowcaseProjects() {
   if (typeof window === 'undefined') return initialShowcaseProjects;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return initialShowcaseProjects;
+    if (!raw) {
+      // Check legacy storage keys to preserve any custom user-added projects
+      const oldRaw = localStorage.getItem('procolour_before_after_projects');
+      if (oldRaw) {
+        const oldParsed = JSON.parse(oldRaw);
+        const customProjects = Array.isArray(oldParsed) ? oldParsed.filter(p => p.id && p.id.startsWith('pc-')) : [];
+        if (customProjects.length > 0) {
+          const merged = [...customProjects, ...initialShowcaseProjects];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+          return merged;
+        }
+      }
+      return initialShowcaseProjects;
+    }
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) {
       return parsed;
