@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Truck, ShieldCheck } from 'lucide-react';
 
 export default function Craftsmanship() {
-  const teamImage = "https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/19visu0731d01037b3c4400463e0ee0fb8f0ef.webflow1_d9be8d926023669c171fa4e2d65482ae_ergebnis.webp";
+  const showcaseImage = "https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_01.webp";
 
   const team = [
     {
@@ -41,10 +41,10 @@ export default function Craftsmanship() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-6 relative"
           >
-            <div className="relative w-full h-[260px] sm:h-[400px] lg:h-[520px] rounded-2xl sm:rounded-3xl overflow-hidden bg-dark-950 border border-white/20 shadow-2xl group">
+            <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[520px] rounded-2xl sm:rounded-3xl overflow-hidden bg-dark-950 border border-white/20 shadow-2xl group">
               <img
-                src={teamImage}
-                alt="Pro Colour Smart Repair Handwerk & Team"
+                src={showcaseImage}
+                alt="Pro Colour Smart Repair Lackschaden Instandsetzung Vorher Nachher"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
