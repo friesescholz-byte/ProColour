@@ -34,6 +34,15 @@ export const initialShowcaseProjects = [
     before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(25)_ergebnis.webp',
     after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(24)_ergebnis.webp',
     createdAt: '2026-09-01T10:00:00.000Z'
+  },
+  {
+    id: 'dellen-ausbeulen-ohne-lackieren',
+    category: 'dellen',
+    title: 'Dellenentfernung ohne Lackieren (DoL)',
+    desc: 'Parkdelle und Blechschaden schonend herausmassiert – 100% Werkslack erhalten, ganz ohne Spachtel- oder Lackierarbeiten.',
+    before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Color-Dellen_01.webp',
+    after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Color-Dellen_02.webp',
+    createdAt: '2026-09-05T10:00:00.000Z'
   }
 ];
 

@@ -22,7 +22,7 @@ export default function PainPointsPAS() {
       id: 'wertverlust',
       problemHeadline: 'Dellen & Parkrempler drücken den Fahrzeugwert?',
       solutionText: 'Sanfte Ausbeultechnik (DoL): Dellen rückstandsfrei herausmassieren – ohne Spachteln und bei 100% Werkslack-Erhalt.',
-      image: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(26)_ergebnis.webp',
+      image: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Color-Dellen_04.webp',
       linkText: 'Delle einschätzen lassen'
     },
     {
@@ -58,7 +58,7 @@ export default function PainPointsPAS() {
           </p>
         </div>
 
-        {/* 4 Clean Visual Cards: Compact 1:1 Images with Large Prominent Typography */}
+        {/* 4 Clean Visual Cards: Full Width Image on Mobile, 1:1 on Desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8">
           {cards.map((card, idx) => (
             <motion.div
@@ -69,8 +69,8 @@ export default function PainPointsPAS() {
               transition={{ duration: 0.4, delay: idx * 0.08 }}
               className="glass-card-pro rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-white/12 hover:border-brand-orange/50 transition-all duration-300 flex flex-col sm:flex-row items-start gap-4 sm:gap-6 group shadow-lg hover:shadow-2xl relative"
             >
-              {/* Compact 1:1 Square Image Frame */}
-              <div className="w-24 h-24 sm:w-36 sm:h-36 md:w-40 md:h-40 aspect-square shrink-0 rounded-xl sm:rounded-2xl overflow-hidden bg-dark-950 border border-white/15 shadow-md relative mx-0">
+              {/* Responsive Image Frame: Prominent on mobile, 1:1 on desktop */}
+              <div className="w-full h-44 xs:h-52 sm:w-36 sm:h-36 md:w-40 md:h-40 sm:aspect-square shrink-0 rounded-xl sm:rounded-2xl overflow-hidden bg-dark-950 border border-white/15 shadow-md relative mx-0">
                 <img
                   src={card.image}
                   alt={card.problemHeadline}

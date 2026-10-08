@@ -1,33 +1,142 @@
-import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare, Camera, Upload, X, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare, Camera, Upload, X, ArrowRight, ShieldCheck, AlertCircle, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+const TURNSTILE_SITEKEY = "0x4AAAAAAFRMeJsz5tYEMNjg";
 
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' });
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [fileAttachments, setFileAttachments] = useState([]);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const turnstileRef = useRef(null);
+  const widgetIdRef = useRef(null);
+
+  // Turnstile Widget Initialization with StrictMode & Polling protection
+  useEffect(() => {
+    let interval = null;
+
+    const renderWidget = () => {
+      if (turnstileRef.current && window.turnstile && !widgetIdRef.current) {
+        try {
+          // Empty container to prevent duplicate renders in StrictMode
+          turnstileRef.current.innerHTML = "";
+          widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+            sitekey: TURNSTILE_SITEKEY,
+            callback: (token) => {
+              setTurnstileToken(token);
+              setErrorMessage("");
+            },
+            "expired-callback": () => setTurnstileToken(""),
+            theme: "dark",
+          });
+          if (interval) clearInterval(interval);
+        } catch (e) {
+          console.error("Turnstile render error:", e);
+        }
+      }
+    };
+
+    renderWidget();
+
+    if (!widgetIdRef.current) {
+      interval = setInterval(() => {
+        if (window.turnstile) {
+          renderWidget();
+        }
+      }, 100);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+      if (widgetIdRef.current && window.turnstile) {
+        try {
+          window.turnstile.remove(widgetIdRef.current);
+        } catch (e) {}
+        widgetIdRef.current = null;
+      }
+    };
+  }, []);
 
   const handleFileUpload = (e) => {
-    const files = Array.from(e.target.files);
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+
     if (files.length + uploadedFiles.length > 3) {
       alert('Sie können maximal 3 Bilder hochladen.');
       return;
     }
-    const newFiles = files.map((file) => ({
-      file,
-      preview: URL.createObjectURL(file),
-      name: file.name
-    }));
-    setUploadedFiles((prev) => [...prev, ...newFiles]);
+
+    files.forEach((file) => {
+      const preview = URL.createObjectURL(file);
+      setUploadedFiles((prev) => [...prev, { file, preview, name: file.name }]);
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const result = event.target?.result;
+        if (typeof result === 'string') {
+          const base64Content = result.split(',')[1] || '';
+          setFileAttachments((prev) => [
+            ...prev,
+            { filename: file.name, content: base64Content }
+          ]);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
   };
 
   const removeFile = (index) => {
     setUploadedFiles((prev) => prev.filter((_, i) => i !== index));
+    setFileAttachments((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setErrorMessage('');
+
+    if (!turnstileToken) {
+      setErrorMessage('Bitte bestätigen Sie kurz den Cloudflare Spam-Schutz.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://friesescholzwebdesign.pages.dev/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          source: 'ProColour',
+          turnstileToken,
+          name: form.name.trim(),
+          phone: form.phone.trim(),
+          email: form.email.trim(),
+          message: form.message.trim(),
+          attachments: fileAttachments,
+        }),
+      });
+
+      const resData = await response.json();
+
+      if (response.ok && resData.success) {
+        setSubmitted(true);
+      } else {
+        setErrorMessage(
+          resData.message || 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns per WhatsApp.'
+        );
+      }
+    } catch (err) {
+      setErrorMessage('Verbindungsfehler zum E-Mail-Server. Bitte kontaktieren Sie uns direkt per Telefon oder WhatsApp.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -60,7 +169,7 @@ export default function ContactSection() {
           <div className="lg:col-span-5 space-y-5">
             
             {/* Contact Card */}
-            <div className="bg-black/50 backdrop-blur-xl rounded-2xl p-6 sm:p-7 border border-white/10 space-y-5 shadow-lg">
+            <div className="bg-black/50 backdrop-blur-xl rounded-2xl p-5 sm:p-7 border border-white/10 space-y-5 shadow-lg">
               
               <div>
                 <h3 className="text-xl font-bold text-white">Pro Colour Smart Repair</h3>
@@ -136,7 +245,7 @@ export default function ContactSection() {
             </div>
 
             {/* Google Maps Frame */}
-            <div className="rounded-2xl overflow-hidden border border-white/10 h-60 bg-dark-900 shadow-lg relative">
+            <div className="rounded-2xl overflow-hidden border border-white/10 h-56 sm:h-60 bg-dark-900 shadow-lg relative">
               <iframe
                 title="Google Maps Standort"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2410.318814450065!2d9.0035397!3d52.8346105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b0559a43a055d7%3A0xeaaf93fe1137cd0c!2sPro%20Colour%20Smart%20Repair%20-%20Jens%20R%C3%BCsch!5e0!3m2!1sde!2sde!4v1700000000000!5m2!1sde!2sde"
@@ -150,26 +259,29 @@ export default function ContactSection() {
 
           </div>
 
-          {/* Right Column: Clean Contact Form with Photo Upload */}
+          {/* Right Column: Clean Contact Form with Photo Upload & Turnstile */}
           <div className="lg:col-span-7">
-            <div className="bg-black/50 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-white/10 shadow-lg">
+            <div className="bg-black/50 backdrop-blur-xl rounded-2xl p-5 sm:p-8 border border-white/10 shadow-lg">
               
               {submitted ? (
-                <div className="py-12 text-center space-y-3">
-                  <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30">
-                    <CheckCircle2 className="w-7 h-7" />
+                <div className="py-10 sm:py-12 text-center space-y-3">
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30 shadow-lg shadow-emerald-500/10">
+                    <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl font-bold text-white">Anfrage erfolgreich versendet!</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">Anfrage erfolgreich versendet!</h3>
                   <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-                    Wir haben Ihre Angaben {uploadedFiles.length > 0 && `inklusive ${uploadedFiles.length} Fotos`} erhalten. Jens Rüsch meldet sich schnellstmöglich bei Ihnen.
+                    Vielen Dank! Wir haben Ihre Angaben {uploadedFiles.length > 0 && `inklusive ${uploadedFiles.length} Fotos`} erhalten. Jens Rüsch meldet sich schnellstmöglich bei Ihnen.
                   </p>
                   <button
+                    type="button"
                     onClick={() => {
                       setSubmitted(false);
                       setUploadedFiles([]);
+                      setFileAttachments([]);
+                      setTurnstileToken('');
                       setForm({ name: '', phone: '', email: '', message: '' });
                     }}
-                    className="mt-3 px-5 py-2.5 rounded-xl bg-dark-900 border border-white/15 text-xs font-bold text-white hover:border-brand-orange cursor-pointer"
+                    className="mt-4 px-6 py-2.5 rounded-xl bg-dark-900 border border-white/15 text-xs font-bold text-white hover:border-brand-orange cursor-pointer transition-colors"
                   >
                     Weitere Nachricht senden
                   </button>
@@ -184,6 +296,13 @@ export default function ContactSection() {
                       Füllen Sie das Formular aus – wir melden uns schnell und unverbindlich.
                     </p>
                   </div>
+
+                  {errorMessage && (
+                    <div className="p-3.5 rounded-xl bg-red-500/15 border border-red-500/30 text-red-200 text-xs flex items-start gap-2.5 animate-fadeIn">
+                      <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                      <span className="leading-relaxed">{errorMessage}</span>
+                    </div>
+                  )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
@@ -205,7 +324,12 @@ export default function ContactSection() {
                         required
                         placeholder="0170 1234567"
                         value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          if (/^[0-9+\s()/-]*$/.test(val)) {
+                            setForm((prev) => ({ ...prev, phone: val }));
+                          }
+                        }}
                         className="w-full bg-[#12151C] border border-white/15 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-colors"
                       />
                     </div>
@@ -227,7 +351,7 @@ export default function ContactSection() {
                     <label className="block text-xs font-bold text-slate-200 mb-1 uppercase tracking-wider">Schadenbeschreibung</label>
                     <textarea
                       rows="3"
-                      placeholder="Beschreiben Sie kurz den Schaden (z. B. Kratzer an Stoßstange, Bordsteinkontakt Alufelge)..."
+                      placeholder="Beschreiben Sie kurz den Schaden (z. B. Kratzer an Stoßstange, Bordsteinkontakt Alufelge, Delle an Tür)..."
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       className="w-full bg-[#12151C] border border-white/15 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-colors"
@@ -246,8 +370,8 @@ export default function ContactSection() {
                       )}
                     </div>
 
-                    <label className="border border-dashed border-white/20 hover:border-brand-orange/60 bg-[#12151C]/60 hover:bg-[#12151C] rounded-xl p-3 flex items-center justify-center gap-2.5 cursor-pointer transition-colors">
-                      <Upload className="w-4 h-4 text-amber-400" />
+                    <label className="border border-dashed border-white/20 hover:border-brand-orange/60 bg-[#12151C]/60 hover:bg-[#12151C] rounded-xl p-3 sm:p-3.5 flex items-center justify-center gap-2.5 cursor-pointer transition-colors">
+                      <Upload className="w-4 h-4 text-amber-400 shrink-0" />
                       <span className="text-xs text-slate-200 font-medium">
                         Fotos auswählen oder hier ablegen (JPG, PNG)
                       </span>
@@ -273,7 +397,7 @@ export default function ContactSection() {
                             <button
                               type="button"
                               onClick={() => removeFile(fIdx)}
-                              className="absolute top-1 right-1 p-0.5 rounded-full bg-black/80 text-white hover:bg-red-600 transition-colors cursor-pointer"
+                              className="absolute top-1 right-1 p-1 rounded-full bg-black/80 text-white hover:bg-red-600 transition-colors cursor-pointer"
                               aria-label="Bild entfernen"
                             >
                               <X className="w-3 h-3" />
@@ -284,13 +408,36 @@ export default function ContactSection() {
                     )}
                   </div>
 
+                  {/* Cloudflare Turnstile Spam-Schutz */}
+                  <div className="pt-1.5">
+                    <div className="text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-brand-orange" />
+                      <span>Sicherheit & Spam-Schutz</span>
+                    </div>
+                    <div className="w-full flex justify-center sm:justify-start overflow-hidden rounded-xl bg-[#12151C]/80 p-2 border border-white/10 min-h-[66px] items-center">
+                      <div ref={turnstileRef}></div>
+                    </div>
+                  </div>
+
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="btn-3d-luxury w-full py-3.5 px-6 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md mt-2"
+                    disabled={isSubmitting || !turnstileToken}
+                    className={`btn-3d-luxury w-full py-3.5 px-6 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md mt-2 transition-all ${
+                      isSubmitting || !turnstileToken ? 'opacity-60 cursor-not-allowed' : 'hover:scale-[1.01] active:scale-[0.99]'
+                    }`}
                   >
-                    <Send className="w-4 h-4" />
-                    <span>Anfrage kostenlos absenden</span>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-white" />
+                        <span>Wird übermittelt...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Anfrage kostenlos absenden</span>
+                      </>
+                    )}
                   </button>
 
                   <div className="pt-1 text-center text-xs text-slate-400">

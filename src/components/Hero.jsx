@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 export default function Hero() {
   const beforeAfterSlides = [
     'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(17)_ergebnis.webp',
-    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(26)_ergebnis.webp',
+    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Color-Dellen_04.webp',
+    'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Color-Dellen_02.webp',
     'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(14)_ergebnis.webp',
     'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(18)_ergebnis.webp',
     'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Vorher-Nachher/Pro-Colour-vorher.nachher_01.webp',
@@ -41,12 +42,12 @@ export default function Hero() {
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* LEFT: 1:1 Aspect Ratio Framed Image Frame (Zoom-Proof & Proportional) */}
-          <div className="lg:col-span-6 relative flex flex-col justify-center items-center lg:items-start">
+          <div className="lg:col-span-6 relative flex flex-col justify-center items-center lg:items-start w-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-[340px] sm:max-w-[580px] lg:max-w-[650px] xl:max-w-[675px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-dark-900 border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] z-10"
+              className="relative w-full max-w-[360px] xs:max-w-[420px] sm:max-w-[580px] lg:max-w-[650px] xl:max-w-[675px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-dark-900 border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] z-10"
             >
               {/* Seamless Stacked Slide Images in 1:1 Format */}
               {beforeAfterSlides.map((imgUrl, idx) => (
@@ -64,7 +65,28 @@ export default function Hero() {
               
               {/* Subtle Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none z-20"></div>
+
+              {/* Slide Counter Badge */}
+              <div className="absolute top-3.5 left-3.5 z-20 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 text-[11px] font-bold text-amber-400">
+                {currentSlide + 1} / {beforeAfterSlides.length} Arbeiten
+              </div>
             </motion.div>
+
+            {/* Subtle Interactive Slide Dots */}
+            <div className="flex items-center gap-1.5 mt-3.5 z-20">
+              {beforeAfterSlides.map((_, dotIdx) => (
+                <button
+                  key={dotIdx}
+                  onClick={() => setCurrentSlide(dotIdx)}
+                  aria-label={`Slide ${dotIdx + 1}`}
+                  className={`transition-all duration-300 rounded-full cursor-pointer ${
+                    currentSlide === dotIdx
+                      ? 'w-6 h-1.5 bg-brand-orange shadow-sm'
+                      : 'w-1.5 h-1.5 bg-white/30 hover:bg-white/60'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
           {/* RIGHT: Structured 3-Line Sales Message & Actions */}

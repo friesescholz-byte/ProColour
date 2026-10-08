@@ -35,6 +35,15 @@ export default function BeforeAfterSlider() {
       before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(12)_ergebnis.webp',
       after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(13)_ergebnis.webp',
       badge: 'Keine Demontage'
+    },
+    {
+      id: 'dellen-dol',
+      title: 'Dellenentfernung ohne Lackieren (DoL)',
+      category: 'Sanfte Ausbeultechnik',
+      description: 'Parkdelle spurlos herausmassiert – 100% Original-Werkslack erhalten ohne Spachtelarbeiten.',
+      before: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Color-Dellen_01.webp',
+      after: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Color-Dellen_02.webp',
+      badge: '100% Werkslack'
     }
   ];
 
@@ -45,7 +54,7 @@ export default function BeforeAfterSlider() {
       tag: 'WheelDoctor Präzision'
     },
     {
-      url: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/unnamed%20(26)_ergebnis.webp',
+      url: 'https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Color-Dellen_04.webp',
       title: 'Dellen- & Karosserieausbesserung',
       tag: 'Sanfte Hebeltechnik'
     },

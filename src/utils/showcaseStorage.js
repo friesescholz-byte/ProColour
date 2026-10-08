@@ -1,6 +1,6 @@
 import { initialShowcaseProjects } from '../data/initialShowcaseProjects.js';
 
-const STORAGE_KEY = 'procolour_before_after_projects_v4';
+const STORAGE_KEY = 'procolour_before_after_projects_v5';
 const AUTH_KEY = 'procolour_admin_auth';
 export const ADMIN_DEFAULT_PASSWORD = 'procolour2026!';
 
