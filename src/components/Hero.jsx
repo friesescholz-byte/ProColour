@@ -65,28 +65,7 @@ export default function Hero() {
               
               {/* Subtle Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none z-20"></div>
-
-              {/* Slide Counter Badge */}
-              <div className="absolute top-3.5 left-3.5 z-20 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 text-[11px] font-bold text-amber-400">
-                {currentSlide + 1} / {beforeAfterSlides.length} Arbeiten
-              </div>
             </motion.div>
-
-            {/* Subtle Interactive Slide Dots */}
-            <div className="flex items-center gap-1.5 mt-3.5 z-20">
-              {beforeAfterSlides.map((_, dotIdx) => (
-                <button
-                  key={dotIdx}
-                  onClick={() => setCurrentSlide(dotIdx)}
-                  aria-label={`Slide ${dotIdx + 1}`}
-                  className={`transition-all duration-300 rounded-full cursor-pointer ${
-                    currentSlide === dotIdx
-                      ? 'w-6 h-1.5 bg-brand-orange shadow-sm'
-                      : 'w-1.5 h-1.5 bg-white/30 hover:bg-white/60'
-                  }`}
-                />
-              ))}
-            </div>
           </div>
 
           {/* RIGHT: Structured 3-Line Sales Message & Actions */}
