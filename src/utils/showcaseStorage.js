@@ -2,7 +2,6 @@ import { initialShowcaseProjects } from '../data/initialShowcaseProjects.js';
 
 const STORAGE_KEY = 'procolour_before_after_projects_v5';
 const AUTH_KEY = 'procolour_admin_auth';
-export const ADMIN_DEFAULT_PASSWORD = 'procolour2026!';
 
 /**
  * Optimizes an uploaded image file (JPG, PNG, WebP) directly in the browser:
@@ -178,8 +177,31 @@ export function isAuthenticated() {
   );
 }
 
-export function loginAdmin(password, rememberMe = false) {
-  if (password === ADMIN_DEFAULT_PASSWORD) {
+export async function loginAdmin(password, rememberMe = false) {
+  const clean = (password || '').trim();
+  if (!clean) return false;
+
+  try {
+    const res = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: clean })
+    });
+    const data = await res.json();
+    if (res.ok && data?.success) {
+      if (rememberMe) {
+        localStorage.setItem(AUTH_KEY, 'true');
+      } else {
+        sessionStorage.setItem(AUTH_KEY, 'true');
+      }
+      return true;
+    }
+  } catch {}
+
+  // Fallback: Secure SHA-256 verification (no plaintext password in source code)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(clean));
+  const hashHex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+  if (hashHex === '9e036ab964d8b296f762374e6160b8e5b6706630cb4b784397c418801fb648be') {
     if (rememberMe) {
       localStorage.setItem(AUTH_KEY, 'true');
     } else {

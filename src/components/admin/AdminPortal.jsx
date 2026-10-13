@@ -71,10 +71,11 @@ export default function AdminPortal() {
     return () => window.removeEventListener('procolour:showcase-updated', handleUpdate);
   }, []);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setAuthError('');
-    if (loginAdmin(passwordInput.trim(), rememberMe)) {
+    const success = await loginAdmin(passwordInput.trim(), rememberMe);
+    if (success) {
       setAuthed(true);
       setProjects(getShowcaseProjects());
       setPasswordInput('');
