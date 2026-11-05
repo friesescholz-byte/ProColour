@@ -661,10 +661,6 @@ export default function AdminPortal() {
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-brand-orange text-xs font-bold">
               Admin Portal
             </span>
-            <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>Live aktiv</span>
-            </span>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
@@ -719,15 +715,6 @@ export default function AdminPortal() {
             >
               <Download className="w-3.5 h-3.5 text-slate-400" />
               <span>Backup</span>
-            </button>
-
-            <button
-              onClick={handleReset}
-              className="px-3.5 py-2 rounded-xl bg-white/[0.05] hover:bg-red-500/15 border border-white/15 hover:border-red-500/30 text-xs font-semibold text-slate-300 hover:text-red-400 transition-all inline-flex items-center gap-1.5 cursor-pointer"
-              title="Auf Standard zurücksetzen"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-              <span>Standard</span>
             </button>
 
             <button
