@@ -16,8 +16,7 @@ import {
   Layers,
   Sparkles,
   ShieldCheck,
-  Mail,
-  Database
+  Mail
 } from 'lucide-react';
 import { SHOWCASE_CATEGORIES } from '../../data/initialShowcaseProjects.js';
 import {
@@ -52,10 +51,10 @@ export default function AdminPortal() {
   const [isResending2FA, setIsResending2FA] = useState(false);
   const [resendNotice, setResendNotice] = useState('');
 
-  // Dashboard & KV State
+  // Dashboard State
   const [projects, setProjects] = useState([]);
   const [activeCategoryFilter, setActiveCategoryFilter] = useState('all');
-  const [isRefreshingKv, setIsRefreshingKv] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [statusNotice, setStatusNotice] = useState('');
 
   // Modal / Editor state
@@ -220,7 +219,7 @@ export default function AdminPortal() {
         setChallengeId('');
         const fresh = await fetchShowcaseProjects();
         setProjects(fresh);
-        showNotice('Erfolgreich angemeldet. Daten aus Cloudflare KV geladen.');
+        showNotice('Erfolgreich angemeldet.');
       } else {
         setAuthError(res.error || 'Ungültiger oder abgelaufener Sicherheitscode.');
       }
@@ -268,16 +267,16 @@ export default function AdminPortal() {
     setChallengeId('');
   };
 
-  const handleRefreshFromKv = async () => {
-    setIsRefreshingKv(true);
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
     try {
       const fresh = await fetchShowcaseProjects();
       setProjects(fresh);
-      showNotice('Live-Daten erfolgreich aus Cloudflare KV synchronisiert!');
+      showNotice('Daten erfolgreich aktualisiert!');
     } catch (err) {
-      alert('Fehler beim Abrufen aus Cloudflare KV.');
+      alert('Fehler beim Aktualisieren der Daten.');
     } finally {
-      setIsRefreshingKv(false);
+      setIsRefreshing(false);
     }
   };
 
@@ -357,9 +356,9 @@ export default function AdminPortal() {
       setProjects(updated);
       setIsEditorOpen(false);
       setEditingId(null);
-      showNotice('Projekt erfolgreich in Cloudflare KV gespeichert & für alle Besucher synchronisiert!');
+      showNotice('Projekt erfolgreich gespeichert & veröffentlicht!');
     } catch (err) {
-      setFormError(err.message || 'Fehler beim Speichern in Cloudflare KV.');
+      setFormError(err.message || 'Fehler beim Speichern.');
     } finally {
       setIsSaving(false);
     }
@@ -380,13 +379,13 @@ export default function AdminPortal() {
   const handleReset = async () => {
     if (
       window.confirm(
-        'Möchten Sie alle Vorher/Nachher-Projekte in Cloudflare KV auf die Standard-Projekte zurücksetzen?'
+        'Möchten Sie alle Vorher/Nachher-Projekte auf die ursprünglichen Standard-Projekte zurücksetzen?'
       )
     ) {
       try {
         const resetProjects = await resetShowcaseProjectsToDefault();
         setProjects(resetProjects);
-        showNotice('Projekte in Cloudflare KV auf Standard zurückgesetzt.');
+        showNotice('Projekte auf Standard zurückgesetzt.');
       } catch (err) {
         alert('Fehler beim Zurücksetzen: ' + (err.message || 'Unbekannter Fehler'));
       }
@@ -664,20 +663,19 @@ export default function AdminPortal() {
             </span>
             <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <Database className="w-3 h-3" />
-              <span>Cloudflare KV Live</span>
+              <span>Live aktiv</span>
             </span>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
             <button
-              onClick={handleRefreshFromKv}
-              disabled={isRefreshingKv}
+              onClick={handleRefresh}
+              disabled={isRefreshing}
               className="px-3 py-1.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-xs font-semibold text-slate-200 hover:text-white transition-all inline-flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
-              title="Daten aus Cloudflare KV neu laden"
+              title="Daten aktualisieren"
             >
-              <RefreshCw className={`w-3.5 h-3.5 text-brand-orange ${isRefreshingKv ? 'animate-spin' : ''}`} />
-              <span className="hidden sm:inline">KV Synchronisieren</span>
+              <RefreshCw className={`w-3.5 h-3.5 text-brand-orange ${isRefreshing ? 'animate-spin' : ''}`} />
+              <span className="hidden sm:inline">Aktualisieren</span>
             </button>
 
             <a
@@ -709,7 +707,7 @@ export default function AdminPortal() {
               Vorher & Nachher Projekte
             </h1>
             <p className="text-slate-400 text-xs sm:text-sm mt-1">
-              Alle Änderungen werden direkt in <strong>Cloudflare KV</strong> gespeichert und sind für jeden Besucher weltweit sichtbar.
+              Hier verwaltest du deine Vorher- & Nachher-Ergebnisse. Alle Änderungen sind sofort live auf der Website für alle Besucher sichtbar.
             </p>
           </div>
 
@@ -1148,12 +1146,12 @@ export default function AdminPortal() {
                   {isSaving ? (
                     <>
                       <RefreshCw className="w-4 h-4 animate-spin" />
-                      <span>In KV speichern...</span>
+                      <span>Wird gespeichert...</span>
                     </>
                   ) : (
                     <>
                       <CheckCircle2 className="w-4 h-4" />
-                      <span>{editingId ? 'Änderungen in KV speichern' : 'Projekt in KV veröffentlichen'}</span>
+                      <span>{editingId ? 'Änderungen speichern' : 'Projekt veröffentlichen'}</span>
                     </>
                   )}
                 </button>

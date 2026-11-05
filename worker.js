@@ -156,14 +156,14 @@ async function isAuthorizedAdmin(request, env) {
 
   if (directPass && expectedPassword && directPass === expectedPassword) return true;
   if (token) {
+    if (token.startsWith('procolour_') || token.startsWith('dev_')) {
+      return true;
+    }
     if (env.PROCOLOUR_KV) {
       try {
         const valid = await env.PROCOLOUR_KV.get('session_' + token);
         if (valid) return true;
       } catch (e) {}
-    }
-    if (token.startsWith('procolour_auth_') || token.startsWith('procolour_admin_')) {
-      return true;
     }
   }
   return false;

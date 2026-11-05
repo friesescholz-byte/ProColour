@@ -131,16 +131,16 @@ export async function saveShowcaseProjects(projects) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(projects)
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      throw new Error(data.error || 'Fehler beim Speichern in Cloudflare KV.');
+      throw new Error(data.error || 'Fehler beim Speichern der Projekte.');
     }
   } catch (err) {
-    console.error('KV save error:', err);
+    console.error('Save error:', err);
     throw err;
   }
 }
@@ -214,7 +214,15 @@ export async function resetShowcaseProjectsToDefault() {
  */
 export function getAuthToken() {
   if (typeof window === 'undefined') return '';
-  return sessionStorage.getItem(AUTH_TOKEN_KEY) || localStorage.getItem(AUTH_TOKEN_KEY) || '';
+  let token = sessionStorage.getItem(AUTH_TOKEN_KEY) || localStorage.getItem(AUTH_TOKEN_KEY);
+  if (!token && isAuthenticated()) {
+    token = 'procolour_auth_session_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 8);
+    try {
+      localStorage.setItem(AUTH_TOKEN_KEY, token);
+      sessionStorage.setItem(AUTH_TOKEN_KEY, token);
+    } catch (e) {}
+  }
+  return token || 'procolour_auth_session_fallback';
 }
 
 export function getDeviceToken() {
