@@ -131,16 +131,28 @@ export default function ContactSection() {
         setErrorMessage(
           resData.message || 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns per WhatsApp.'
         );
+        if (window.turnstile && widgetIdRef.current) {
+          try {
+            window.turnstile.reset(widgetIdRef.current);
+            setTurnstileToken('');
+          } catch (e) {}
+        }
       }
     } catch (err) {
       setErrorMessage('Verbindungsfehler zum E-Mail-Server. Bitte kontaktieren Sie uns direkt per Telefon oder WhatsApp.');
+      if (window.turnstile && widgetIdRef.current) {
+        try {
+          window.turnstile.reset(widgetIdRef.current);
+          setTurnstileToken('');
+        } catch (e) {}
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="contact" className="py-18 md:py-24 bg-paint-gloss text-white border-b border-white/10 relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-24 bg-paint-gloss text-white border-b border-white/10 relative overflow-hidden">
       
       {/* Subtle ambient lighting */}
       <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-brand-orange/8 rounded-full blur-[180px] pointer-events-none"></div>
@@ -245,7 +257,7 @@ export default function ContactSection() {
             </div>
 
             {/* Google Maps Frame */}
-            <div className="rounded-2xl overflow-hidden border border-white/10 h-56 sm:h-60 bg-dark-900 shadow-lg relative">
+            <div className="rounded-2xl overflow-hidden border border-white/10 h-48 xs:h-56 sm:h-64 bg-dark-900 shadow-lg relative">
               <iframe
                 title="Google Maps Standort"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2410.318814450065!2d9.0035397!3d52.8346105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b0559a43a055d7%3A0xeaaf93fe1137cd0c!2sPro%20Colour%20Smart%20Repair%20-%20Jens%20R%C3%BCsch!5e0!3m2!1sde!2sde!4v1700000000000!5m2!1sde!2sde"
@@ -281,7 +293,7 @@ export default function ContactSection() {
                       setTurnstileToken('');
                       setForm({ name: '', phone: '', email: '', message: '' });
                     }}
-                    className="mt-4 px-6 py-2.5 rounded-xl bg-dark-900 border border-white/15 text-xs font-bold text-white hover:border-brand-orange cursor-pointer transition-colors"
+                    className="mt-4 px-6 py-3 rounded-xl bg-dark-900 border border-white/15 text-xs font-bold text-white hover:border-brand-orange cursor-pointer transition-colors"
                   >
                     Weitere Nachricht senden
                   </button>
@@ -313,7 +325,7 @@ export default function ContactSection() {
                         placeholder="Max Mustermann"
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="w-full bg-[#12151C] border border-white/15 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-colors"
+                        className="w-full bg-[#12151C] border border-white/15 rounded-xl px-3.5 py-3 text-base sm:text-sm text-white focus:outline-none focus:border-brand-orange transition-colors"
                       />
                     </div>
 
@@ -330,7 +342,7 @@ export default function ContactSection() {
                             setForm((prev) => ({ ...prev, phone: val }));
                           }
                         }}
-                        className="w-full bg-[#12151C] border border-white/15 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-colors"
+                        className="w-full bg-[#12151C] border border-white/15 rounded-xl px-3.5 py-3 text-base sm:text-sm text-white focus:outline-none focus:border-brand-orange transition-colors"
                       />
                     </div>
                   </div>
@@ -343,7 +355,7 @@ export default function ContactSection() {
                       placeholder="ihre-email@beispiel.de"
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full bg-[#12151C] border border-white/15 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-colors"
+                      className="w-full bg-[#12151C] border border-white/15 rounded-xl px-3.5 py-3 text-base sm:text-sm text-white focus:outline-none focus:border-brand-orange transition-colors"
                     />
                   </div>
 
@@ -354,7 +366,7 @@ export default function ContactSection() {
                       placeholder="Beschreiben Sie kurz den Schaden (z. B. Kratzer an Stoßstange, Bordsteinkontakt Alufelge, Delle an Tür)..."
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="w-full bg-[#12151C] border border-white/15 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-colors"
+                      className="w-full bg-[#12151C] border border-white/15 rounded-xl px-3.5 py-3 text-base sm:text-sm text-white focus:outline-none focus:border-brand-orange transition-colors"
                     ></textarea>
                   </div>
 
@@ -370,7 +382,7 @@ export default function ContactSection() {
                       )}
                     </div>
 
-                    <label className="border border-dashed border-white/20 hover:border-brand-orange/60 bg-[#12151C]/60 hover:bg-[#12151C] rounded-xl p-3 sm:p-3.5 flex items-center justify-center gap-2.5 cursor-pointer transition-colors">
+                    <label className="border border-dashed border-white/20 hover:border-brand-orange/60 bg-[#12151C]/60 hover:bg-[#12151C] rounded-xl p-3.5 sm:p-4 min-h-[50px] flex items-center justify-center gap-2.5 cursor-pointer transition-colors active:scale-98">
                       <Upload className="w-4 h-4 text-amber-400 shrink-0" />
                       <span className="text-xs text-slate-200 font-medium">
                         Fotos auswählen oder hier ablegen (JPG, PNG)
@@ -414,7 +426,7 @@ export default function ContactSection() {
                       <ShieldCheck className="w-3.5 h-3.5 text-brand-orange" />
                       <span>Sicherheit & Spam-Schutz</span>
                     </div>
-                    <div className="w-full flex justify-center sm:justify-start overflow-hidden rounded-xl bg-[#12151C]/80 p-2 border border-white/10 min-h-[66px] items-center">
+                    <div className="w-full max-w-full overflow-x-auto flex justify-center sm:justify-start rounded-xl bg-[#12151C]/80 p-2.5 border border-white/10 min-h-[68px] items-center">
                       <div ref={turnstileRef}></div>
                     </div>
                   </div>
@@ -423,8 +435,8 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting || !turnstileToken}
-                    className={`btn-3d-luxury w-full py-3.5 px-6 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md mt-2 transition-all ${
-                      isSubmitting || !turnstileToken ? 'opacity-60 cursor-not-allowed' : 'hover:scale-[1.01] active:scale-[0.99]'
+                    className={`btn-3d-luxury w-full min-h-[50px] py-3.5 px-6 text-white font-bold text-sm sm:text-base rounded-xl flex items-center justify-center gap-2 cursor-pointer shadow-md mt-2 transition-all active:scale-98 ${
+                      isSubmitting || !turnstileToken ? 'opacity-60 cursor-not-allowed' : 'hover:scale-[1.01]'
                     }`}
                   >
                     {isSubmitting ? (

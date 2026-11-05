@@ -19,6 +19,40 @@
     
     <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoRepair",
+      "name": "Pro Colour Smart Repair",
+      "image": "https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Colour_logo_ergebnis.webp",
+      "telephone": "+491702025130",
+      "email": "info@pro-colour.de",
+      "url": "https://www.pro-colour.de/",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Lange Straße 108",
+        "addressLocality": "Bruchhausen-Vilsen",
+        "postalCode": "27305",
+        "addressCountry": "DE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 52.8346105,
+        "longitude": 9.0035397
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Friday"],
+          "opens": "07:00",
+          "closes": "16:00"
+        }
+      ],
+      "priceRange": "$$"
+    }
+    </script>
   </head>
   <body class="bg-dark-950 text-slate-100 font-sans antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden">
     <div id="root"></div>

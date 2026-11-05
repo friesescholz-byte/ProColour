@@ -35,7 +35,7 @@ export default function PainPointsPAS() {
   ];
 
   return (
-    <section id="pas-problems" className="py-18 md:py-24 bg-paint-matte border-b border-white/10 relative overflow-hidden">
+    <section id="pas-problems" className="py-14 sm:py-20 lg:py-24 bg-paint-matte border-b border-white/10 relative overflow-hidden">
       
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-orange/5 rounded-full blur-[180px] pointer-events-none"></div>
@@ -43,7 +43,7 @@ export default function PainPointsPAS() {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         
         {/* Section Header with Clean Icon-Free Eyebrow */}
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-10 sm:mb-16">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-orange block mb-2">
             Wirtschaftlichkeit & Werterhalt
           </span>
@@ -70,7 +70,7 @@ export default function PainPointsPAS() {
               className="glass-card-pro rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-white/12 hover:border-brand-orange/50 transition-all duration-300 flex flex-col sm:flex-row items-start gap-4 sm:gap-6 group shadow-lg hover:shadow-2xl relative"
             >
               {/* Responsive Image Frame: Prominent on mobile, 1:1 on desktop */}
-              <div className="w-full h-44 xs:h-52 sm:w-36 sm:h-36 md:w-40 md:h-40 sm:aspect-square shrink-0 rounded-xl sm:rounded-2xl overflow-hidden bg-dark-950 border border-white/15 shadow-md relative mx-0">
+              <div className="w-full h-48 xs:h-56 sm:w-40 sm:h-40 md:w-44 md:h-44 sm:aspect-square shrink-0 rounded-2xl overflow-hidden bg-dark-950 border border-white/15 shadow-md relative mx-0">
                 <img
                   src={card.image}
                   alt={card.problemHeadline}
@@ -86,8 +86,8 @@ export default function PainPointsPAS() {
                     {card.problemHeadline}
                   </h3>
 
-                  <div className="text-slate-200 text-xs sm:text-base leading-relaxed pt-0.5">
-                    <span className="text-amber-400 font-bold flex items-center gap-1.5 mb-1">
+                  <div className="text-slate-200 text-sm sm:text-base leading-relaxed pt-0.5">
+                    <span className="text-amber-400 font-bold flex items-center gap-1.5 mb-1 text-xs sm:text-sm">
                       <CheckCircle2 className="w-4 h-4 text-brand-orange shrink-0" />
                       <span>Die Pro Colour Lösung:</span>
                     </span>
@@ -103,7 +103,7 @@ export default function PainPointsPAS() {
                     href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20eine%20Anfrage%20zu:%20${encodeURIComponent(card.problemHeadline)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-amber-400 hover:text-white transition-colors group/link"
+                    className="min-h-[44px] inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-amber-400 hover:text-white transition-colors group/link py-1"
                   >
                     <span>{card.linkText}</span>
                     <ArrowRight className="w-4 h-4 text-brand-orange group-hover/link:translate-x-1 transition-transform" />

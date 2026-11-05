@@ -47,7 +47,7 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="relative py-20 md:py-28 bg-[#0E1117] text-white overflow-hidden border-b border-white/10">
+    <section id="services" className="relative py-16 sm:py-24 lg:py-28 bg-[#0E1117] text-white overflow-hidden border-b border-white/10">
       
       {/* High-End Background Video with Luxury Glass Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -72,7 +72,7 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-10 sm:mb-16">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-orange block mb-2">
             Unsere Fachbereiche & Gutachten
           </span>
@@ -88,7 +88,7 @@ export default function Services() {
         </div>
 
         {/* 4 Clean Glassmorphic Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-7">
           {services.map((item, idx) => {
             const Icon = item.icon;
             return (
@@ -98,7 +98,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.08 }}
-                className="bg-black/60 hover:bg-black/75 backdrop-blur-2xl rounded-2xl p-6 sm:p-8 border border-white/15 hover:border-brand-orange/50 transition-all duration-300 flex flex-col justify-between group shadow-xl hover:shadow-brand-orange/15"
+                className="bg-black/60 hover:bg-black/75 backdrop-blur-2xl rounded-2xl p-5 sm:p-8 border border-white/15 hover:border-brand-orange/50 transition-all duration-300 flex flex-col justify-between group shadow-xl hover:shadow-brand-orange/15"
               >
                 <div className="space-y-4">
                   {/* Top Bar: Icon */}
@@ -119,7 +119,7 @@ export default function Services() {
                   </div>
 
                   {/* Benefit Points */}
-                  <ul className="space-y-2 pt-2 border-t border-white/10">
+                  <ul className="space-y-2.5 pt-2 border-t border-white/10">
                     {item.points.map((pt, pIdx) => (
                       <li key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-200">
                         <CheckCircle2 className="w-4 h-4 text-brand-orange shrink-0 mt-0.5" />
@@ -130,13 +130,13 @@ export default function Services() {
                 </div>
 
                 {/* Card CTA Footer */}
-                <div className="pt-5 mt-4 border-t border-white/10 flex items-center justify-between">
+                <div className="pt-5 mt-4 border-t border-white/10 flex items-center justify-between min-h-[44px]">
                   <span className="text-xs text-slate-400">100% Festpreis-Transparenz</span>
                   <a
                     href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20eine%20Preiseinsch%C3%A4tzung%20f%C3%BCr:%20${encodeURIComponent(item.title)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-400 hover:text-white transition-colors group/link"
+                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-400 hover:text-white transition-colors group/link p-1"
                   >
                     <span>Schaden anfragen</span>
                     <ArrowRight className="w-3.5 h-3.5 text-brand-orange group-hover/link:translate-x-1 transition-transform" />
@@ -154,7 +154,7 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="mt-8 lg:mt-10 bg-gradient-to-r from-brand-orange/15 via-black/80 to-amber-500/10 border border-brand-orange/40 hover:border-brand-orange/70 rounded-2xl p-6 sm:p-8 backdrop-blur-2xl shadow-xl transition-all duration-300"
+          className="mt-8 lg:mt-10 bg-gradient-to-r from-brand-orange/15 via-black/80 to-amber-500/10 border border-brand-orange/40 hover:border-brand-orange/70 rounded-2xl p-5 sm:p-8 backdrop-blur-2xl shadow-xl transition-all duration-300"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
             
@@ -169,16 +169,16 @@ export default function Services() {
                 Wir erfassen beanstandbare Lack-, Felgen- und Karosserieschäden vor dem offiziellen Gutachtertermin und beseitigen diese nach Herstellervorgaben – bis zu 75% günstiger als die Nachbelastung durch das Autohaus.
               </p>
 
-              <div className="pt-1">
+              <div className="pt-2">
                 <a
                   href="https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20ein%20Vorab-Gutachten%20f%C3%BCr%20meine%20Leasing-R%C3%BCckgabe%20anfragen."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-gradient-to-r from-brand-orange to-amber-500 hover:from-amber-500 hover:to-brand-orange text-white font-bold text-xs sm:text-sm shadow-lg hover:shadow-brand-orange/25 transition-all duration-300 active:scale-95"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-orange to-amber-500 hover:from-amber-500 hover:to-brand-orange text-white font-bold text-sm shadow-lg hover:shadow-brand-orange/25 transition-all duration-300 active:scale-95"
                 >
-                  <FileCheck2 className="w-4 h-4" />
+                  <FileCheck2 className="w-4 h-4 shrink-0" />
                   <span>Leasing-Gutachten anfragen</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 shrink-0" />
                 </a>
               </div>
             </div>

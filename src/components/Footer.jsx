@@ -11,10 +11,10 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-[#0B0D13] text-slate-400 text-xs py-16 border-t border-white/10 relative z-10">
+      <footer className="bg-[#0B0D13] text-slate-400 text-xs pt-14 sm:pt-16 pb-28 sm:pb-16 border-t border-white/10 relative z-10">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10">
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-white/10">
             
             {/* Col 1: Brand & Bio */}
             <div className="space-y-4">
@@ -37,13 +37,13 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="text-sm font-black text-white uppercase tracking-wider">Leistungen & Galerie</div>
               <ul className="space-y-2 text-slate-300">
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Spot-Repair & Lackierung</a></li>
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Alufelgenaufbereitung (TÜV WheelDoctor)</a></li>
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Dellenentfernung ohne Lackieren (DoL)</a></li>
-                <li><a href="#services" className="hover:text-amber-400 transition-colors">Lederinstandsetzung & Colourlock®</a></li>
-                <li><a href="#partners" className="hover:text-amber-400 transition-colors">Autohäuser & Partner</a></li>
+                <li><a href="#services" className="hover:text-amber-400 transition-colors py-1 inline-block">Spot-Repair & Lackierung</a></li>
+                <li><a href="#services" className="hover:text-amber-400 transition-colors py-1 inline-block">Alufelgenaufbereitung (TÜV WheelDoctor)</a></li>
+                <li><a href="#services" className="hover:text-amber-400 transition-colors py-1 inline-block">Dellenentfernung ohne Lackieren (DoL)</a></li>
+                <li><a href="#services" className="hover:text-amber-400 transition-colors py-1 inline-block">Lederinstandsetzung & Colourlock®</a></li>
+                <li><a href="#partners" className="hover:text-amber-400 transition-colors py-1 inline-block">Autohäuser & Partner</a></li>
                 <li>
-                  <a href="#results" className="text-amber-400 hover:text-white font-bold flex items-center gap-1 transition-colors">
+                  <a href="#results" className="text-amber-400 hover:text-white font-bold inline-flex items-center gap-1 transition-colors py-1">
                     <span>Echte Vorher- & Nachher-Galerie</span>
                     <span>➔</span>
                   </a>
@@ -54,7 +54,7 @@ export default function Footer() {
             {/* Col 3: Contact & Workshop */}
             <div className="space-y-3">
               <div className="text-sm font-black text-white uppercase tracking-wider">Standort & Kontakt</div>
-              <div className="space-y-2 text-slate-300">
+              <div className="space-y-2.5 text-slate-300">
                 <p className="text-white font-bold">Pro Colour Smart Repair</p>
                 <p className="text-slate-400">Inhaber: Jens Rüsch</p>
                 <p className="flex items-start gap-2">
@@ -63,11 +63,11 @@ export default function Footer() {
                 </p>
                 <p className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-amber-400 shrink-0" />
-                  <a href="tel:01702025130" className="text-amber-400 font-bold hover:underline">0170 2025130</a>
+                  <a href="tel:01702025130" className="text-amber-400 font-bold hover:underline py-1 inline-block">0170 2025130</a>
                 </p>
                 <p className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-brand-orange shrink-0" />
-                  <a href="mailto:info@pro-colour.de" className="hover:text-white transition-colors">info@pro-colour.de</a>
+                  <a href="mailto:info@pro-colour.de" className="hover:text-white transition-colors py-1 inline-block">info@pro-colour.de</a>
                 </p>
               </div>
             </div>
@@ -107,32 +107,32 @@ export default function Footer() {
           </div>
 
           {/* Bottom Bar: Copyright & Legal Modals */}
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-xs">
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-xs text-center sm:text-left">
             <p>© {new Date().getFullYear()} Pro Colour Smart Repair – Inh. Jens Rüsch. Alle Rechte vorbehalten.</p>
             
-            <div className="flex flex-wrap items-center gap-6">
+            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-6">
               <button
                 onClick={() => setModal('impressum')}
-                className="hover:text-white underline-offset-4 hover:underline cursor-pointer"
+                className="min-h-[44px] flex items-center hover:text-white underline-offset-4 hover:underline cursor-pointer py-1 px-2"
               >
                 Impressum
               </button>
               <button
                 onClick={() => setModal('datenschutz')}
-                className="hover:text-white underline-offset-4 hover:underline cursor-pointer"
+                className="min-h-[44px] flex items-center hover:text-white underline-offset-4 hover:underline cursor-pointer py-1 px-2"
               >
                 Datenschutz
               </button>
               <button
                 onClick={() => setModal('barrierefreiheit')}
-                className="hover:text-amber-400 underline-offset-4 hover:underline cursor-pointer flex items-center gap-1.5"
+                className="min-h-[44px] flex items-center hover:text-amber-400 underline-offset-4 hover:underline cursor-pointer gap-1.5 py-1 px-2"
               >
                 <Accessibility className="w-3.5 h-3.5 text-brand-orange" />
                 <span>Erklärung zur Barrierefreiheit</span>
               </button>
               <button
                 onClick={scrollToTop}
-                className="p-2 rounded-xl bg-black/60 border border-white/15 text-slate-300 hover:text-white hover:border-brand-orange transition-all cursor-pointer"
+                className="w-10 h-10 rounded-xl bg-black/60 border border-white/15 text-slate-300 hover:text-white hover:border-brand-orange transition-all cursor-pointer flex items-center justify-center active:scale-95 shrink-0"
                 aria-label="Nach oben scrollen"
               >
                 <ArrowUp className="w-4 h-4" />

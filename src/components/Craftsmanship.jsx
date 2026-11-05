@@ -24,14 +24,14 @@ export default function Craftsmanship() {
   ];
 
   return (
-    <section id="craftsmanship" className="py-20 md:py-28 bg-paint-matte border-b border-white/10 relative overflow-hidden">
+    <section id="craftsmanship" className="py-16 sm:py-24 lg:py-28 bg-paint-matte border-b border-white/10 relative overflow-hidden">
       
       {/* Ambient background glow */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-brand-orange/6 rounded-full blur-[180px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           
           {/* Left: Clean, Framed Team / Craftsmanship Photo (No distracting overlay badges/cards) */}
           <motion.div
@@ -41,7 +41,7 @@ export default function Craftsmanship() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-6 relative"
           >
-            <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[520px] rounded-2xl sm:rounded-3xl overflow-hidden bg-dark-950 border border-white/20 shadow-2xl group">
+            <div className="relative w-full h-[260px] xs:h-[320px] sm:h-[400px] lg:h-[520px] rounded-2xl sm:rounded-3xl overflow-hidden bg-dark-950 border border-white/20 shadow-2xl group">
               <img
                 src={showcaseImage}
                 alt="Pro Colour Smart Repair Lackschaden Instandsetzung Vorher Nachher"

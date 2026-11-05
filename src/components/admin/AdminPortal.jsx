@@ -258,6 +258,15 @@ export default function AdminPortal() {
               </div>
             )}
 
+            {/* Cloudflare Turnstile Bot-Schutz */}
+            <div className="pt-1 flex justify-center overflow-hidden">
+              <div
+                className="cf-turnstile"
+                data-sitekey="0x4AAAAAAFRMeJsz5tYEMNjg"
+                data-theme="dark"
+              ></div>
+            </div>
+
             <button
               type="submit"
               className="btn-3d-luxury w-full py-3 rounded-xl text-white font-bold text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg"

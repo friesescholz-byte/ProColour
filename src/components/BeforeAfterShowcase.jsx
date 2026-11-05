@@ -55,7 +55,7 @@ export default function BeforeAfterShowcase() {
   };
 
   return (
-    <section id="results" className="py-18 md:py-24 bg-paint-nardo border-b border-white/10 relative overflow-hidden">
+    <section id="results" className="py-14 sm:py-20 lg:py-24 bg-paint-nardo border-b border-white/10 relative overflow-hidden">
       
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-orange/6 rounded-full blur-[180px] pointer-events-none"></div>
@@ -63,7 +63,7 @@ export default function BeforeAfterShowcase() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto space-y-3 mb-10 sm:mb-12">
+        <div className="text-center max-w-2xl mx-auto space-y-3 mb-8 sm:mb-12">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-orange block mb-2">
             Vorher & Nachher Vergleich
           </span>
@@ -84,10 +84,10 @@ export default function BeforeAfterShowcase() {
             <button
               key={cat.id}
               onClick={() => handleFilterChange(cat.id)}
-              className={`px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+              className={`min-h-[40px] px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 transition-all cursor-pointer flex items-center justify-center ${
                 activeFilter === cat.id
                   ? 'bg-gradient-to-r from-brand-orange to-amber-500 text-white shadow-md shadow-brand-orange/20 scale-105'
-                  : 'bg-black/40 hover:bg-black/60 text-slate-300 hover:text-white border border-white/10'
+                  : 'bg-black/40 hover:bg-black/60 text-slate-300 hover:text-white border border-white/10 active:scale-95'
               }`}
             >
               {cat.name}
@@ -124,19 +124,19 @@ export default function BeforeAfterShowcase() {
                   <div className="absolute top-3 right-3 z-20">
                     <button
                       onClick={() => setModalItem({ ...item, currentMode })}
-                      className="p-2 rounded-lg bg-black/75 hover:bg-brand-orange text-white backdrop-blur-md border border-white/15 transition-colors cursor-pointer"
+                      className="w-9 h-9 rounded-lg bg-black/75 hover:bg-brand-orange text-white backdrop-blur-md border border-white/15 transition-colors cursor-pointer flex items-center justify-center active:scale-95"
                       aria-label="Großansicht öffnen"
                     >
-                      <Eye className="w-3.5 h-3.5" />
+                      <Eye className="w-4 h-4" />
                     </button>
                   </div>
 
                   {/* Bottom Interactive Vorher/Nachher Pill Switch */}
                   <div className="absolute bottom-3 left-3 z-20">
-                    <div className="flex bg-black/85 backdrop-blur-xl p-1 rounded-lg border border-white/15 shadow-lg">
+                    <div className="flex bg-black/85 backdrop-blur-xl p-1 rounded-xl border border-white/15 shadow-lg">
                       <button
                         onClick={() => handleToggle(item.id, 'before')}
-                        className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                        className={`min-h-[34px] px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
                           currentMode === 'before'
                             ? 'bg-red-600 text-white shadow-sm'
                             : 'text-slate-400 hover:text-white'
@@ -146,7 +146,7 @@ export default function BeforeAfterShowcase() {
                       </button>
                       <button
                         onClick={() => handleToggle(item.id, 'after')}
-                        className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                        className={`min-h-[34px] px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
                           currentMode === 'after'
                             ? 'bg-emerald-600 text-white shadow-sm'
                             : 'text-slate-400 hover:text-white'
@@ -163,19 +163,19 @@ export default function BeforeAfterShowcase() {
                   <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-amber-400 transition-colors leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
 
                 {/* Card Footer Link */}
-                <div className="px-5 sm:px-6 pb-5 pt-2 border-t border-white/10 flex items-center justify-between">
+                <div className="px-5 sm:px-6 pb-4 pt-2 border-t border-white/10 flex items-center justify-between min-h-[44px]">
                   <span className="text-xs text-slate-400">Direkte Einschätzung</span>
                   <a
                     href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20habe%20eine%20Frage%20zu%20einer%20Reparatur%20wie%20hier:%20${encodeURIComponent(item.title)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-amber-400 hover:text-white transition-colors group/link"
+                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-400 hover:text-white transition-colors group/link p-1"
                   >
                     <span>Preis anfragen</span>
                     <ArrowRight className="w-3.5 h-3.5 text-brand-orange group-hover/link:translate-x-1 transition-transform" />
@@ -189,9 +189,9 @@ export default function BeforeAfterShowcase() {
 
         {/* Pagination Controls (Always 3 at a time) */}
         {totalPages > 1 && (
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-10 sm:pt-12 border-t border-white/10 mt-10">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 sm:pt-12 border-t border-white/10 mt-10">
             <div className="text-xs sm:text-sm text-slate-400 order-2 sm:order-1 text-center sm:text-left">
-              Ergebnisse <span className="font-semibold text-white">{startIndex + 1}–{Math.min(startIndex + ITEMS_PER_PAGE, filteredPairs.length)}</span> von <span className="font-semibold text-white">{filteredPairs.length}</span> Arbeiten (Seite {currentPage} von {totalPages})
+              Ergebnisse <span className="font-semibold text-white">{startIndex + 1}–{Math.min(startIndex + ITEMS_PER_PAGE, filteredPairs.length)}</span> von <span className="font-semibold text-white">{filteredPairs.length}</span> Arbeiten
             </div>
 
             <div className="flex items-center gap-2 order-1 sm:order-2">
@@ -200,13 +200,13 @@ export default function BeforeAfterShowcase() {
                 onClick={() => goToPage(currentPage - 1)}
                 disabled={currentPage === 1}
                 aria-label="Vorherige Seite"
-                className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                className={`min-h-[40px] inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   currentPage === 1
                     ? 'opacity-30 cursor-not-allowed bg-black/20 text-slate-500 border border-white/5'
                     : 'bg-black/50 hover:bg-black/80 text-white border border-white/15 hover:border-brand-orange/40 hover:scale-105 active:scale-95 shadow-md'
                 }`}
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="w-4 h-4 shrink-0" />
                 <span className="hidden xs:inline">Vorherige</span>
               </button>
 
@@ -216,7 +216,7 @@ export default function BeforeAfterShowcase() {
                   <button
                     key={pageNum}
                     onClick={() => goToPage(pageNum)}
-                    className={`w-9 h-9 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center ${
+                    className={`min-w-[38px] h-[38px] rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center ${
                       currentPage === pageNum
                         ? 'bg-gradient-to-r from-brand-orange to-amber-500 text-white shadow-lg shadow-brand-orange/25 scale-105'
                         : 'bg-black/40 hover:bg-black/70 text-slate-300 hover:text-white border border-white/10'
@@ -232,14 +232,14 @@ export default function BeforeAfterShowcase() {
                 onClick={() => goToPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
                 aria-label="Nächste Seite"
-                className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                className={`min-h-[40px] inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   currentPage === totalPages
                     ? 'opacity-30 cursor-not-allowed bg-black/20 text-slate-500 border border-white/5'
                     : 'bg-gradient-to-r from-brand-orange to-amber-500 text-white shadow-md shadow-brand-orange/20 hover:scale-105 active:scale-95 border border-amber-400/30'
                 }`}
               >
-                <span>Nächste Seite</span>
-                <ChevronRight className="w-4 h-4" />
+                <span className="hidden xs:inline">Nächste</span>
+                <ChevronRight className="w-4 h-4 shrink-0" />
               </button>
             </div>
           </div>
@@ -266,28 +266,28 @@ export default function BeforeAfterShowcase() {
             >
               <button
                 onClick={() => setModalItem(null)}
-                className="absolute top-3.5 right-3.5 p-1.5 rounded-full bg-white/10 hover:bg-brand-orange text-white transition-colors cursor-pointer z-30"
+                className="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/10 hover:bg-brand-orange text-white transition-colors cursor-pointer z-30 flex items-center justify-center"
                 aria-label="Schließen"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
 
               <div>
-                <h3 className="text-lg sm:text-2xl font-bold text-white pr-8">{modalItem.title}</h3>
-                <p className="text-slate-300 text-xs sm:text-sm mt-0.5 leading-relaxed">{modalItem.desc}</p>
+                <h3 className="text-lg sm:text-2xl font-bold text-white pr-10">{modalItem.title}</h3>
+                <p className="text-slate-300 text-sm mt-0.5 leading-relaxed">{modalItem.desc}</p>
               </div>
 
-              <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-black border border-white/10">
+              <div className="relative aspect-[4/3] sm:aspect-[16/10] rounded-xl overflow-hidden bg-black border border-white/10">
                 <img
                   src={modalItem.currentMode === 'before' ? modalItem.before : modalItem.after}
                   alt={modalItem.title}
                   className="w-full h-full object-cover object-center"
                 />
 
-                <div className="absolute bottom-3 left-3 flex bg-black/85 backdrop-blur-xl p-1 rounded-lg border border-white/20 shadow-xl">
+                <div className="absolute bottom-3 left-3 flex bg-black/85 backdrop-blur-xl p-1 rounded-xl border border-white/20 shadow-xl">
                   <button
                     onClick={() => setModalItem((prev) => ({ ...prev, currentMode: 'before' }))}
-                    className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                    className={`px-3.5 py-1.5 min-h-[36px] rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
                       modalItem.currentMode === 'before'
                         ? 'bg-red-600 text-white shadow-sm'
                         : 'text-slate-400 hover:text-white'
@@ -297,7 +297,7 @@ export default function BeforeAfterShowcase() {
                   </button>
                   <button
                     onClick={() => setModalItem((prev) => ({ ...prev, currentMode: 'after' }))}
-                    className={`px-3 py-1 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                    className={`px-3.5 py-1.5 min-h-[36px] rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
                       modalItem.currentMode === 'after'
                         ? 'bg-emerald-600 text-white shadow-sm'
                         : 'text-slate-400 hover:text-white'
@@ -314,10 +314,10 @@ export default function BeforeAfterShowcase() {
                   href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20habe%20eine%20Preisanfrage%20zu:%20${encodeURIComponent(modalItem.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-3d-luxury w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-white text-xs font-bold cursor-pointer"
+                  className="btn-3d-luxury w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-white text-sm font-bold cursor-pointer active:scale-98 transition-transform"
                 >
                   <span>Gleichen Schaden per WhatsApp anfragen</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
 

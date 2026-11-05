@@ -86,14 +86,14 @@ export default function Navbar() {
             href="https://wa.me/491702025130"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-xl bg-brand-orange text-white sm:hidden shadow-md"
+            className="w-11 h-11 rounded-xl bg-brand-orange text-white sm:hidden shadow-md flex items-center justify-center active:scale-95 transition-transform"
             aria-label="WhatsApp Nachricht senden"
           >
-            <MessageSquare className="w-4 h-4" />
+            <MessageSquare className="w-5 h-5 fill-current" />
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2.5 rounded-xl bg-dark-900 border border-white/10 text-slate-200 cursor-pointer"
+            className="w-11 h-11 rounded-xl bg-dark-900 border border-white/10 text-slate-200 cursor-pointer flex items-center justify-center active:scale-95 transition-transform"
             aria-label="Menü öffnen"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5 text-amber-400" />}
@@ -109,31 +109,31 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#141210]/98 backdrop-blur-2xl border-b border-white/10 px-5 sm:px-6 pt-3 pb-7 space-y-3 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto"
+            className="lg:hidden bg-[#141210]/98 backdrop-blur-2xl border-b border-white/10 px-5 sm:px-6 pt-3 pb-8 space-y-2 shadow-2xl max-h-[calc(100vh-70px)] overflow-y-auto"
           >
             {navLinks.map((l) => (
               <a
                 key={l.name}
                 href={l.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2.5 text-base font-semibold text-slate-200 hover:text-brand-orange border-b border-white/5 transition-colors"
+                className="flex items-center min-h-[44px] py-3 text-base font-semibold text-slate-200 hover:text-brand-orange border-b border-white/5 transition-colors"
               >
                 {l.name}
               </a>
             ))}
-            <div className="pt-3 space-y-2.5">
+            <div className="pt-4 space-y-3">
               <a
                 href="https://wa.me/491702025130"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-eyecatcher flex items-center justify-center gap-2.5 w-full text-white py-3.5 rounded-xl font-black text-sm"
+                className="btn-eyecatcher flex items-center justify-center gap-2.5 w-full text-white min-h-[48px] py-3.5 rounded-xl font-black text-sm active:scale-98 transition-transform"
               >
                 <MessageSquare className="w-4 h-4 fill-current" />
                 Foto per WhatsApp senden
               </a>
               <a
                 href="tel:01702025130"
-                className="flex items-center justify-center gap-2 w-full bg-dark-900 border border-white/10 text-slate-200 py-3 rounded-xl font-bold text-sm"
+                className="flex items-center justify-center gap-2 w-full bg-dark-900 border border-white/10 text-slate-200 min-h-[48px] py-3.5 rounded-xl font-bold text-sm active:scale-98 transition-transform"
               >
                 <Phone className="w-4 h-4 text-brand-orange" />
                 Jetzt anrufen: 0170 2025130
