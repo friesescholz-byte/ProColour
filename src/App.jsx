@@ -10,7 +10,7 @@ import GoogleReviews from './components/GoogleReviews.jsx';
 import ContactSection from './components/ContactSection.jsx';
 import Footer from './components/Footer.jsx';
 import AdminPortal from './components/admin/AdminPortal.jsx';
-import MobileQuickBar from './components/MobileQuickBar.jsx';
+
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -67,8 +67,6 @@ export default function App() {
       {/* Footer */}
       <Footer />
 
-      {/* Sticky Mobile Quick Action Bar (1-Tap WhatsApp & Call on Smartphones) */}
-      <MobileQuickBar />
     </div>
   );
 }
