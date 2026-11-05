@@ -2,6 +2,8 @@ import { initialShowcaseProjects } from '../data/initialShowcaseProjects.js';
 
 const STORAGE_KEY = 'procolour_before_after_projects_v5';
 const AUTH_KEY = 'procolour_admin_auth';
+const AUTH_TOKEN_KEY = 'procolour_auth_token';
+const DEVICE_TOKEN_KEY = 'procolour_device_token';
 
 /**
  * Optimizes an uploaded image file (JPG, PNG, WebP) directly in the browser:
@@ -69,29 +71,17 @@ export async function optimizeImageFileToWebP(file, maxDimension = 1600, quality
 }
 
 /**
- * Retrieve all Before/After projects
+ * Retrieve cached Before/After projects immediately (synchronous)
  */
 export function getShowcaseProjects() {
   if (typeof window === 'undefined') return initialShowcaseProjects;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      // Check legacy storage keys to preserve any custom user-added projects
-      const oldRaw = localStorage.getItem('procolour_before_after_projects');
-      if (oldRaw) {
-        const oldParsed = JSON.parse(oldRaw);
-        const customProjects = Array.isArray(oldParsed) ? oldParsed.filter(p => p.id && p.id.startsWith('pc-')) : [];
-        if (customProjects.length > 0) {
-          const merged = [...customProjects, ...initialShowcaseProjects];
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
-          return merged;
-        }
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
       }
-      return initialShowcaseProjects;
-    }
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
     }
   } catch (e) {
     console.error('Failed to parse stored projects:', e);
@@ -100,23 +90,65 @@ export function getShowcaseProjects() {
 }
 
 /**
- * Save projects and notify listeners
+ * Fetches latest projects from Cloudflare KV and updates local cache
  */
-export function saveShowcaseProjects(projects) {
+export async function fetchShowcaseProjects() {
+  if (typeof window === 'undefined') return initialShowcaseProjects;
+  try {
+    const res = await fetch('/api/projects');
+    if (res.ok) {
+      const projects = await res.json();
+      if (Array.isArray(projects) && projects.length > 0) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+        window.dispatchEvent(new CustomEvent('procolour:showcase-updated', { detail: projects }));
+        return projects;
+      }
+    }
+  } catch (e) {
+    console.warn('Could not fetch projects from Cloudflare KV, using local cache:', e);
+  }
+  return getShowcaseProjects();
+}
+
+/**
+ * Save projects to both Cloudflare KV (persisted across all visitors) and localStorage
+ */
+export async function saveShowcaseProjects(projects) {
   if (typeof window === 'undefined') return;
+  
+  // 1. Instant local update for optimistic UI
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
     window.dispatchEvent(new CustomEvent('procolour:showcase-updated', { detail: projects }));
   } catch (e) {
-    console.error('Failed to save projects to localStorage:', e);
-    throw new Error('Speicherlimit erreicht oder Browser-Speicher blockiert.');
+    console.error('Failed saving to localStorage:', e);
+  }
+
+  // 2. Persist to Cloudflare KV via API
+  const token = getAuthToken();
+  try {
+    const res = await fetch('/api/projects', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+      },
+      body: JSON.stringify(projects)
+    });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || 'Fehler beim Speichern in Cloudflare KV.');
+    }
+  } catch (err) {
+    console.error('KV save error:', err);
+    throw err;
   }
 }
 
 /**
- * Add a new Before/After project
+ * Add a new Before/After project (persists to KV)
  */
-export function addShowcaseProject(projectData) {
+export async function addShowcaseProject(projectData) {
   const current = getShowcaseProjects();
   const newProject = {
     id: 'pc-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 6),
@@ -124,14 +156,14 @@ export function addShowcaseProject(projectData) {
     ...projectData
   };
   const updated = [newProject, ...current];
-  saveShowcaseProjects(updated);
+  await saveShowcaseProjects(updated);
   return updated;
 }
 
 /**
- * Update an existing project
+ * Update an existing project (persists to KV)
  */
-export function updateShowcaseProject(id, updatedFields) {
+export async function updateShowcaseProject(id, updatedFields) {
   const current = getShowcaseProjects();
   const index = current.findIndex(p => p.id === id);
   if (index === -1) return current;
@@ -142,33 +174,54 @@ export function updateShowcaseProject(id, updatedFields) {
     ...updatedFields,
     updatedAt: new Date().toISOString()
   };
-  saveShowcaseProjects(updated);
+  await saveShowcaseProjects(updated);
   return updated;
 }
 
 /**
- * Delete a project by ID
+ * Delete a project by ID (persists to KV)
  */
-export function deleteShowcaseProject(id) {
+export async function deleteShowcaseProject(id) {
   const current = getShowcaseProjects();
   const updated = current.filter(p => p.id !== id);
-  saveShowcaseProjects(updated);
+  await saveShowcaseProjects(updated);
   return updated;
 }
 
 /**
- * Reset back to initial default projects
+ * Reset back to initial default projects in Cloudflare KV
  */
-export function resetShowcaseProjectsToDefault() {
+export async function resetShowcaseProjectsToDefault() {
   if (typeof window === 'undefined') return initialShowcaseProjects;
-  localStorage.removeItem(STORAGE_KEY);
+  const token = getAuthToken();
+  try {
+    await fetch('/api/projects/reset', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+      }
+    });
+  } catch (e) {}
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(initialShowcaseProjects));
   window.dispatchEvent(new CustomEvent('procolour:showcase-updated', { detail: initialShowcaseProjects }));
   return initialShowcaseProjects;
 }
 
 /**
- * Authentication helpers
+ * Token and Auth Helpers
  */
+export function getAuthToken() {
+  if (typeof window === 'undefined') return '';
+  return sessionStorage.getItem(AUTH_TOKEN_KEY) || localStorage.getItem(AUTH_TOKEN_KEY) || '';
+}
+
+export function getDeviceToken() {
+  if (typeof window === 'undefined') return '';
+  return localStorage.getItem(DEVICE_TOKEN_KEY) || '';
+}
+
 export function isAuthenticated() {
   if (typeof window === 'undefined') return false;
   return (
@@ -177,31 +230,55 @@ export function isAuthenticated() {
   );
 }
 
+/**
+ * Step 1: Login with Password + Turnstile (Triggers 2FA or bypasses if trusted)
+ */
 export async function loginAdmin(password, rememberMe = false, turnstileToken = '') {
   const clean = (password || '').trim();
   if (!clean) return { success: false, error: 'Bitte ein Passwort eingeben.' };
+
+  const deviceToken = getDeviceToken();
 
   try {
     const res = await fetch('/api/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: clean, turnstileToken })
+      body: JSON.stringify({ password: clean, turnstileToken, deviceToken })
     });
     const data = await res.json();
+
     if (res.ok && data?.success) {
-      if (rememberMe) {
-        localStorage.setItem(AUTH_KEY, 'true');
-      } else {
-        sessionStorage.setItem(AUTH_KEY, 'true');
+      // 2FA required
+      if (data.require2FA) {
+        return {
+          success: true,
+          require2FA: true,
+          challengeId: data.challengeId,
+          email: data.email || 'info@pro-colour.de'
+        };
+      }
+
+      // Trusted device login
+      if (data.token) {
+        if (rememberMe) {
+          localStorage.setItem(AUTH_KEY, 'true');
+          localStorage.setItem(AUTH_TOKEN_KEY, data.token);
+        } else {
+          sessionStorage.setItem(AUTH_KEY, 'true');
+          sessionStorage.setItem(AUTH_TOKEN_KEY, data.token);
+        }
       }
       return { success: true };
     }
+
     if (data?.error) {
       return { success: false, error: data.error };
     }
-  } catch {}
+  } catch (err) {
+    console.warn('Server login error:', err);
+  }
 
-  // Fallback: Secure SHA-256 verification (no plaintext password in source code)
+  // Fallback: SHA-256 for local / offline recovery
   const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(clean));
   const hashHex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
   if (hashHex === '9e036ab964d8b296f762374e6160b8e5b6706630cb4b784397c418801fb648be') {
@@ -215,8 +292,65 @@ export async function loginAdmin(password, rememberMe = false, turnstileToken = 
   return { success: false, error: 'Ungültiges Passwort. Bitte überprüfen.' };
 }
 
+/**
+ * Step 2: Verify 6-digit 2FA code sent to info@pro-colour.de
+ */
+export async function verify2FA(challengeId, code, rememberDevice = true) {
+  const cleanCode = (code || '').trim();
+  if (!cleanCode || cleanCode.length < 6) {
+    return { success: false, error: 'Bitte den vollständigen 6-stelligen Sicherheitscode eingeben.' };
+  }
+
+  try {
+    const res = await fetch('/api/admin/verify-2fa', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ challengeId, code: cleanCode, rememberDevice })
+    });
+    const data = await res.json();
+
+    if (res.ok && data?.success) {
+      sessionStorage.setItem(AUTH_KEY, 'true');
+      if (data.token) {
+        sessionStorage.setItem(AUTH_TOKEN_KEY, data.token);
+      }
+      if (data.deviceToken) {
+        localStorage.setItem(DEVICE_TOKEN_KEY, data.deviceToken);
+      }
+      if (rememberDevice) {
+        localStorage.setItem(AUTH_KEY, 'true');
+        if (data.token) localStorage.setItem(AUTH_TOKEN_KEY, data.token);
+      }
+      return { success: true };
+    }
+
+    return { success: false, error: data?.error || 'Ungültiger oder abgelaufener Sicherheitscode.' };
+  } catch (err) {
+    return { success: false, error: 'Netzwerkfehler bei der Bestätigung des Codes.' };
+  }
+}
+
+/**
+ * Resend a new 2FA code
+ */
+export async function resend2FA(password) {
+  try {
+    const res = await fetch('/api/admin/resend-2fa', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password })
+    });
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return { success: false, error: 'Fehler beim erneuten Senden des Codes.' };
+  }
+}
+
 export function logoutAdmin() {
   if (typeof window === 'undefined') return;
   sessionStorage.removeItem(AUTH_KEY);
+  sessionStorage.removeItem(AUTH_TOKEN_KEY);
   localStorage.removeItem(AUTH_KEY);
+  localStorage.removeItem(AUTH_TOKEN_KEY);
 }

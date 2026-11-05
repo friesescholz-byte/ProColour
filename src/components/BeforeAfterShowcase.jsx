@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Eye, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getShowcaseProjects } from '../utils/showcaseStorage.js';
+import { getShowcaseProjects, fetchShowcaseProjects } from '../utils/showcaseStorage.js';
 import { SHOWCASE_CATEGORIES } from '../data/initialShowcaseProjects.js';
 
 export default function BeforeAfterShowcase() {
@@ -14,8 +14,15 @@ export default function BeforeAfterShowcase() {
   const [modalItem, setModalItem] = useState(null);
 
   useEffect(() => {
-    // Initial load
+    // Initial load from local cache
     setProjects(getShowcaseProjects());
+
+    // Fetch fresh projects from Cloudflare KV
+    fetchShowcaseProjects().then((kvProjects) => {
+      if (kvProjects && kvProjects.length > 0) {
+        setProjects(kvProjects);
+      }
+    });
 
     // Listen to admin updates in real-time
     const handleUpdate = (e) => {
