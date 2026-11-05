@@ -41,8 +41,8 @@ export default function Hero() {
         {/* Main Grid: Left Framed Showcase + Right Content */}
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
           
-          {/* LEFT: 1:1 Aspect Ratio Framed Image Frame (Zoom-Proof & Proportional) */}
-          <div className="lg:col-span-6 relative flex flex-col justify-center items-center lg:items-start w-full">
+          {/* LEFT: 1:1 Aspect Ratio Framed Image Frame (order-2 on mobile, order-1 on desktop) */}
+          <div className="lg:col-span-6 relative flex flex-col justify-center items-center lg:items-start w-full order-2 lg:order-1">
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -68,8 +68,8 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* RIGHT: Structured 3-Line Sales Message & Actions */}
-          <div className="lg:col-span-6 flex flex-col justify-center space-y-4 sm:space-y-6 text-left lg:pl-4 py-2">
+          {/* RIGHT: Structured 3-Line Sales Message & Actions (order-1 on mobile, order-2 on desktop) */}
+          <div className="lg:col-span-6 flex flex-col justify-center space-y-4 sm:space-y-6 text-left lg:pl-4 py-2 order-1 lg:order-2">
             
             {/* 3-Line Structured Headline */}
             <motion.div
