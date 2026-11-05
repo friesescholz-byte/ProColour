@@ -111,40 +111,34 @@
     filter: drop-shadow(0 4px 15px rgba(255, 94, 30, 0.5)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
   }
 
-  /* 3D High-Class Luxury Tactile Button */
+  /* Premium Tactile Action Button */
   .btn-3d-luxury {
-    background: linear-gradient(180deg, #FF6F32 0%, #FF520E 50%, #D83B00 100%);
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 5px solid #8F2200;
-    border-radius: 16px;
+    background: linear-gradient(135deg, #FF6E2E 0%, #FF5E1E 50%, #E64A0A 100%);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 14px;
     box-shadow: 
-      0 12px 28px -4px rgba(255, 94, 30, 0.5),
-      0 4px 10px rgba(0, 0, 0, 0.6),
-      inset 0 1px 2px rgba(255, 255, 255, 0.7),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.25);
-    transition: all 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+      0 8px 24px -4px rgba(255, 94, 30, 0.45),
+      0 2px 6px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
     position: relative;
+    letter-spacing: 0.01em;
   }
 
   .btn-3d-luxury:hover {
-    background: linear-gradient(180deg, #FF7B42 0%, #FF5B1C 50%, #E34000 100%);
-    border-bottom: 6px solid #8F2200;
+    background: linear-gradient(135deg, #FF7B40 0%, #FF6626 50%, #EB5212 100%);
     box-shadow: 
-      0 18px 38px -4px rgba(255, 94, 30, 0.65),
-      0 6px 14px rgba(0, 0, 0, 0.7),
-      inset 0 1px 2px rgba(255, 255, 255, 0.8),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
+      0 12px 30px -4px rgba(255, 94, 30, 0.6),
+      0 4px 10px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    transform: translateY(-1.5px);
   }
 
   .btn-3d-luxury:active {
-    border-bottom: 1px solid #8F2200;
     box-shadow: 
-      0 4px 10px rgba(255, 94, 30, 0.4),
-      inset 0 2px 4px rgba(0, 0, 0, 0.4);
-    transform: translateY(4px);
+      0 4px 12px rgba(255, 94, 30, 0.35),
+      inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
   }
 
   .text-gradient-orange {

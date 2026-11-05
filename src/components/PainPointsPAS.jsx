@@ -58,8 +58,8 @@ export default function PainPointsPAS() {
           </p>
         </div>
 
-        {/* 4 Clean Visual Cards: Full Width Image on Mobile, 1:1 on Desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8">
+        {/* 4 Clean Visual Cards: Equal-Height Grid with full-width image banner on Mobile & iPad, 1:1 side-by-side on wide Desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 lg:gap-8">
           {cards.map((card, idx) => (
             <motion.div
               key={card.id}
@@ -67,10 +67,10 @@ export default function PainPointsPAS() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="glass-card-pro rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-white/12 hover:border-brand-orange/50 transition-all duration-300 flex flex-col sm:flex-row items-start gap-4 sm:gap-6 group shadow-lg hover:shadow-2xl relative"
+              className="glass-card-pro rounded-2xl sm:rounded-3xl p-5 md:p-6 lg:p-7 border border-white/12 hover:border-brand-orange/50 transition-all duration-300 flex flex-col xl:flex-row items-start gap-4 sm:gap-5 xl:gap-6 group shadow-lg hover:shadow-2xl relative h-full justify-between"
             >
-              {/* Responsive Image Frame: Prominent on mobile, 1:1 on desktop */}
-              <div className="w-full h-48 xs:h-56 sm:w-40 sm:h-40 md:w-44 md:h-44 sm:aspect-square shrink-0 rounded-2xl overflow-hidden bg-dark-950 border border-white/15 shadow-md relative mx-0">
+              {/* Responsive Image Frame: High-res banner on mobile & iPad, square on wide desktop */}
+              <div className="w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[16/10] xl:w-44 xl:h-44 xl:aspect-square shrink-0 rounded-xl sm:rounded-2xl overflow-hidden bg-dark-950 border border-white/15 shadow-md relative mx-0">
                 <img
                   src={card.image}
                   alt={card.problemHeadline}
@@ -80,30 +80,30 @@ export default function PainPointsPAS() {
               </div>
 
               {/* Large, Prominent Text Body */}
-              <div className="flex flex-col justify-between flex-grow space-y-3 text-left w-full">
+              <div className="flex flex-col justify-between flex-grow space-y-3 text-left w-full h-full">
                 <div className="space-y-1.5 sm:space-y-2">
-                  <h3 className="text-lg sm:text-2xl font-extrabold text-white group-hover:text-amber-400 transition-colors leading-snug">
+                  <h3 className="text-lg sm:text-xl xl:text-2xl font-extrabold text-white group-hover:text-amber-400 transition-colors leading-snug">
                     {card.problemHeadline}
                   </h3>
 
-                  <div className="text-slate-200 text-sm sm:text-base leading-relaxed pt-0.5">
+                  <div className="text-slate-200 text-xs sm:text-sm leading-relaxed pt-0.5">
                     <span className="text-amber-400 font-bold flex items-center gap-1.5 mb-1 text-xs sm:text-sm">
                       <CheckCircle2 className="w-4 h-4 text-brand-orange shrink-0" />
                       <span>Die Pro Colour Lösung:</span>
                     </span>
-                    <p className="text-slate-300">
+                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                       {card.solutionText}
                     </p>
                   </div>
                 </div>
 
                 {/* Card Action Link */}
-                <div className="pt-2 border-t border-white/10 flex items-center justify-start">
+                <div className="pt-2.5 border-t border-white/10 flex items-center justify-start mt-auto">
                   <a
                     href={`https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20eine%20Anfrage%20zu:%20${encodeURIComponent(card.problemHeadline)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="min-h-[44px] inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-amber-400 hover:text-white transition-colors group/link py-1"
+                    className="min-h-[44px] inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-400 hover:text-white transition-colors group/link py-1"
                   >
                     <span>{card.linkText}</span>
                     <ArrowRight className="w-4 h-4 text-brand-orange group-hover/link:translate-x-1 transition-transform" />

@@ -109,7 +109,7 @@ export default function Hero() {
                   href="https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20ein%20Schadensfoto%20f%C3%BCr%20eine%20Preiseinsch%C3%A4tzung%20senden."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-3d-luxury w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 md:px-5 md:py-3.5 lg:px-7 lg:py-4 text-white text-sm sm:text-base md:text-sm lg:text-base font-black tracking-wide rounded-xl group cursor-pointer shadow-lg active:scale-98 transition-transform"
+                  className="btn-3d-luxury w-full sm:w-auto max-w-md inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-7 sm:py-4 text-white text-sm sm:text-base font-bold tracking-wide rounded-xl group cursor-pointer shadow-lg active:scale-98 transition-all"
                 >
                   <MessageSquare className="w-4 h-4 fill-current shrink-0" />
                   <span>Foto per WhatsApp senden</span>
