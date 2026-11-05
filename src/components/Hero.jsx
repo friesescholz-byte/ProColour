@@ -29,7 +29,7 @@ export default function Hero() {
   }, [beforeAfterSlides.length]);
 
   return (
-    <section className="relative w-full bg-paint-gloss text-white overflow-hidden px-4 sm:px-6 lg:px-10 pt-24 sm:pt-32 lg:pt-36 pb-6 sm:pb-12 flex flex-col justify-center items-center min-h-[85vh] lg:min-h-screen">
+    <section className="relative w-full bg-paint-gloss text-white overflow-hidden px-4 sm:px-6 md:px-8 lg:px-10 pt-20 sm:pt-24 md:pt-28 lg:pt-36 pb-6 sm:pb-8 md:pb-10 lg:pb-12 flex flex-col justify-center items-center min-h-[85vh] md:min-h-[680px] lg:min-h-screen">
       
       {/* Automotive Clearcoat Ambient Glow */}
       <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-brand-orange/10 rounded-full blur-[180px] pointer-events-none"></div>
@@ -38,16 +38,16 @@ export default function Hero() {
       {/* Unified Zoom-Proof Content Wrapper */}
       <div className="w-full max-w-[1600px] mx-auto flex flex-col relative z-10 my-auto">
         
-        {/* Main Grid: Left Framed Showcase + Right Content */}
-        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
+        {/* Main Grid: Left Framed Showcase + Right Content (2-Column on iPad md: & Desktop lg:) */}
+        <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-12 items-center">
           
-          {/* LEFT: 1:1 Aspect Ratio Framed Image Frame (order-2 on mobile, order-1 on desktop) */}
-          <div className="lg:col-span-6 relative flex flex-col justify-center items-center lg:items-start w-full order-2 lg:order-1">
+          {/* LEFT: 1:1 Aspect Ratio Framed Image Frame (order-2 on mobile, order-1 on tablet & desktop) */}
+          <div className="md:col-span-6 relative flex flex-col justify-center items-center md:items-start w-full order-2 md:order-1">
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-[340px] xs:max-w-[400px] sm:max-w-[560px] lg:max-w-[650px] xl:max-w-[675px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-dark-900 border border-white/20 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.9)] z-10"
+              className="relative w-full max-w-[320px] xs:max-w-[380px] sm:max-w-[420px] md:max-w-[380px] lg:max-w-[650px] xl:max-w-[675px] aspect-square rounded-2xl md:rounded-3xl overflow-hidden bg-dark-900 border border-white/20 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.9)] z-10"
             >
               {/* Seamless Stacked Slide Images in 1:1 Format */}
               {beforeAfterSlides.map((imgUrl, idx) => (
@@ -68,8 +68,8 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* RIGHT: Structured 3-Line Sales Message & Actions (order-1 on mobile, order-2 on desktop) */}
-          <div className="lg:col-span-6 flex flex-col justify-center space-y-4 sm:space-y-6 text-left lg:pl-4 py-2 order-1 lg:order-2">
+          {/* RIGHT: Structured 3-Line Sales Message & Actions (order-1 on mobile, order-2 on tablet & desktop) */}
+          <div className="md:col-span-6 flex flex-col justify-center space-y-3.5 sm:space-y-4 md:space-y-4 lg:space-y-6 text-left md:pl-2 lg:pl-4 py-2 order-1 md:order-2">
             
             {/* 3-Line Structured Headline */}
             <motion.div
@@ -78,7 +78,7 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="space-y-1"
             >
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl xl:text-[3.5rem] font-black text-white tracking-tight leading-[1.15]">
+              <h1 className="text-2xl xs:text-3xl sm:text-3xl md:text-[1.85rem] lg:text-5xl xl:text-[3.5rem] font-black text-white tracking-tight leading-[1.15]">
                 Kratzer, Dellen & <br />
                 Lackschäden <br />
                 <span className="text-gradient-orange underline decoration-brand-orange decoration-3 underline-offset-6">
@@ -92,7 +92,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-sm sm:text-base lg:text-lg text-slate-200 font-normal leading-relaxed max-w-lg"
+              className="text-sm sm:text-base md:text-sm lg:text-lg text-slate-200 font-normal leading-relaxed max-w-lg"
             >
               Bis zu <strong className="text-amber-400 font-black underline decoration-amber-400 decoration-2 underline-offset-4">70% günstiger</strong> als ein Neuteile-Austausch. Mit dem <span className="text-amber-300 font-bold">TÜV WheelDoctor System</span> und 100% Werkslack-Erhalt.
             </motion.p>
@@ -102,14 +102,14 @@ export default function Hero() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="pt-1 sm:pt-2 space-y-3"
+              className="pt-1 md:pt-1 lg:pt-2 space-y-3"
             >
               <div>
                 <a
                   href="https://wa.me/491702025130?text=Hallo%20Herr%20R%C3%BCsch,%20ich%20m%C3%B6chte%20ein%20Schadensfoto%20f%C3%BCr%20eine%20Preiseinsch%C3%A4tzung%20senden."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-3d-luxury w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 text-white text-sm sm:text-base font-black tracking-wide rounded-xl group cursor-pointer shadow-lg active:scale-98 transition-transform"
+                  className="btn-3d-luxury w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 md:px-5 md:py-3.5 lg:px-7 lg:py-4 text-white text-sm sm:text-base md:text-sm lg:text-base font-black tracking-wide rounded-xl group cursor-pointer shadow-lg active:scale-98 transition-transform"
                 >
                   <MessageSquare className="w-4 h-4 fill-current shrink-0" />
                   <span>Foto per WhatsApp senden</span>
@@ -135,11 +135,11 @@ export default function Hero() {
         </div>
 
         {/* OVERLAPPING BOTTOM TITLE (Original Brand Schriftzug) */}
-        <div className="w-full relative z-30 pointer-events-none select-none mt-6 sm:-mt-12 lg:-mt-16 overflow-visible pl-1 sm:pl-4">
+        <div className="w-full relative z-30 pointer-events-none select-none mt-4 md:-mt-8 lg:-mt-16 overflow-visible pl-1 sm:pl-4">
           <img
             src="https://pub-b33108412309406a9a941ddc51e9a5b9.r2.dev/ProColour/Pro-Colour_Schriftzug_01.webp"
             alt="Pro Colour Smart Repair"
-            className="h-[clamp(2.2rem,6.8vw,6.8rem)] w-auto max-w-full object-contain object-left drop-shadow-[0_15px_35px_rgba(0,0,0,0.95)]"
+            className="h-[clamp(2rem,5vw,6.8rem)] w-auto max-w-full object-contain object-left drop-shadow-[0_15px_35px_rgba(0,0,0,0.95)]"
             loading="eager"
           />
         </div>
