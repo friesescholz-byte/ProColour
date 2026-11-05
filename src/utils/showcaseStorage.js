@@ -177,15 +177,15 @@ export function isAuthenticated() {
   );
 }
 
-export async function loginAdmin(password, rememberMe = false) {
+export async function loginAdmin(password, rememberMe = false, turnstileToken = '') {
   const clean = (password || '').trim();
-  if (!clean) return false;
+  if (!clean) return { success: false, error: 'Bitte ein Passwort eingeben.' };
 
   try {
     const res = await fetch('/api/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: clean })
+      body: JSON.stringify({ password: clean, turnstileToken })
     });
     const data = await res.json();
     if (res.ok && data?.success) {
@@ -194,7 +194,10 @@ export async function loginAdmin(password, rememberMe = false) {
       } else {
         sessionStorage.setItem(AUTH_KEY, 'true');
       }
-      return true;
+      return { success: true };
+    }
+    if (data?.error) {
+      return { success: false, error: data.error };
     }
   } catch {}
 
@@ -207,9 +210,9 @@ export async function loginAdmin(password, rememberMe = false) {
     } else {
       sessionStorage.setItem(AUTH_KEY, 'true');
     }
-    return true;
+    return { success: true };
   }
-  return false;
+  return { success: false, error: 'Ungültiges Passwort. Bitte überprüfen.' };
 }
 
 export function logoutAdmin() {

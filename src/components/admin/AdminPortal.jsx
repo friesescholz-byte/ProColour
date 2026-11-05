@@ -55,6 +55,58 @@ export default function AdminPortal() {
   const beforeInputRef = useRef(null);
   const afterInputRef = useRef(null);
 
+  // Cloudflare Turnstile State & Refs (Weymann-Architektur)
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef(null);
+  const widgetIdRef = useRef(null);
+
+  // Turnstile Widget initialisieren (mit Polling & StrictMode-Schutz)
+  useEffect(() => {
+    if (authed) return;
+    let interval;
+
+    const renderWidget = () => {
+      if (turnstileRef.current && window.turnstile && !widgetIdRef.current) {
+        try {
+          // Container zwingend leeren gegen Doppelrender im StrictMode
+          turnstileRef.current.innerHTML = '';
+          widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+            sitekey: '0x4AAAAAAFRMeJsz5tYEMNjg',
+            callback: (token) => {
+              setTurnstileToken(token);
+              setAuthError('');
+            },
+            'expired-callback': () => setTurnstileToken(''),
+            theme: 'dark'
+          });
+          if (interval) clearInterval(interval);
+        } catch (e) {
+          console.error('Turnstile render error:', e);
+        }
+      }
+    };
+
+    renderWidget();
+
+    if (!widgetIdRef.current) {
+      interval = setInterval(() => {
+        if (window.turnstile) {
+          renderWidget();
+        }
+      }, 100);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+      if (widgetIdRef.current && window.turnstile) {
+        try {
+          window.turnstile.remove(widgetIdRef.current);
+        } catch (e) {}
+        widgetIdRef.current = null;
+      }
+    };
+  }, [authed]);
+
   useEffect(() => {
     const ok = isAuthenticated();
     setAuthed(ok);
@@ -74,13 +126,25 @@ export default function AdminPortal() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setAuthError('');
-    const success = await loginAdmin(passwordInput.trim(), rememberMe);
-    if (success) {
+
+    if (!turnstileToken) {
+      setAuthError('Bitte bestätigen Sie kurz den Cloudflare Spam-Schutz.');
+      return;
+    }
+
+    const res = await loginAdmin(passwordInput.trim(), rememberMe, turnstileToken);
+    if (res.success) {
       setAuthed(true);
       setProjects(getShowcaseProjects());
       setPasswordInput('');
     } else {
-      setAuthError('Ungültiges Passwort. Bitte überprüfen.');
+      setAuthError(res.error || 'Ungültiges Passwort. Bitte überprüfen.');
+      if (window.turnstile && widgetIdRef.current) {
+        try {
+          window.turnstile.reset(widgetIdRef.current);
+          setTurnstileToken('');
+        } catch (err) {}
+      }
     }
   };
 
@@ -259,17 +323,16 @@ export default function AdminPortal() {
             )}
 
             {/* Cloudflare Turnstile Bot-Schutz */}
-            <div className="pt-1 flex justify-center overflow-hidden">
-              <div
-                className="cf-turnstile"
-                data-sitekey="0x4AAAAAAFRMeJsz5tYEMNjg"
-                data-theme="dark"
-              ></div>
+            <div className="pt-1 flex justify-center overflow-hidden min-h-[65px]">
+              <div ref={turnstileRef} className="cf-turnstile"></div>
             </div>
 
             <button
               type="submit"
-              className="btn-3d-luxury w-full py-3 rounded-xl text-white font-bold text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+              disabled={!turnstileToken}
+              className={`btn-3d-luxury w-full py-3 rounded-xl text-white font-bold text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg transition-opacity ${
+                !turnstileToken ? 'opacity-60 cursor-not-allowed' : ''
+              }`}
             >
               <Unlock className="w-4 h-4" />
               <span>Anmelden</span>
